@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
 
 namespace IronBank.Controllers
 {
@@ -6,7 +7,9 @@ namespace IronBank.Controllers
     {
         public ActionResult World()
         {
-            return View();
+            var db = new IronBank.Models.IronBankEntities();
+            var products = (from p in db.Products select p).ToList();
+            return View(products);
         }
     }
 }

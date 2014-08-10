@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
@@ -14,7 +15,6 @@ namespace IronBank
         protected void Application_Start(object sender, EventArgs e)
         {
             GlobalConfiguration.Configure(IronBank.App_Start.WebApiConfig.Register);
-
         }
 
         protected void Session_Start(object sender, EventArgs e)

@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IronBank", "IronBank\IronBank.csproj", "{621EA83A-30A0-459D-B1CB-474BA057B3C5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IronBank.Testing", "IronBank.Testing\IronBank.Testing.csproj", "{12052F29-A9D0-41A6-9537-0462A432D347}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{621EA83A-30A0-459D-B1CB-474BA057B3C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{621EA83A-30A0-459D-B1CB-474BA057B3C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{621EA83A-30A0-459D-B1CB-474BA057B3C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12052F29-A9D0-41A6-9537-0462A432D347}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12052F29-A9D0-41A6-9537-0462A432D347}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12052F29-A9D0-41A6-9537-0462A432D347}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12052F29-A9D0-41A6-9537-0462A432D347}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
