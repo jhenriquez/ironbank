@@ -2,11 +2,11 @@
 
 namespace IronBank.Models
 {
-    public class IronDataInitializer : DropCreateDatabaseAlways<IronBankEntities>
+    public class IronDataInitializer : DropCreateDatabaseIfModelChanges<IronBankEntities>
     {
         protected override void Seed(IronBankEntities context)
         {
-            context.Products.Add(new Product { Type = ProductType.SavingsAccount });
+            context.Customers.Add(new Customer() { Name = "Pablo", LastName = "Batida" });
             context.SaveChanges();
         }
     }

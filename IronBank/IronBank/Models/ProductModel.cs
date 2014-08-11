@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -25,6 +26,10 @@ namespace IronBank.Models
 
         public ProductCurrency Currency { get; set; }
 
+        public Int32 CustomerId { get; set; }
+
+        public virtual Customer Customer { get; set; }
+
         [NotMapped]
         public Double Balance { get; set; }
 
@@ -34,8 +39,9 @@ namespace IronBank.Models
 
     public interface IProductService
     {
-        bool Delete(Product product);
-        IEnumerable<Product> GetByCustomer(Int32 id);
+        void Delete(Product product);
+        void DeleteById(Int32 id);
+        IList<Product> GetByCustomer(Int32 id);
         Product GetById(Int32 id);
         Product Save(Product product);
     }
@@ -58,22 +64,33 @@ namespace IronBank.Models
             
         public Product GetById(Int32 id)
         {
-            return null;
+            return _context.Products.Where((p) => p.Id == id).FirstOrDefault();
         }
 
-        public IEnumerable<Product> GetByCustomer(Int32 id)
+        public IList<Product> GetByCustomer(Int32 id)
         {
-            return null;
+            return _context.Products.Where((p) => p.CustomerId == id).ToList();
         }
 
         public Product Save(Product product)
         {
+            _context.Products.Add(product);
+            _context.SaveChanges();
             return product;
         }
 
-        public bool Delete(Product product)
+        public void Delete(Product product)
         {
-            return false;
+            _context.Products.Remove(product);
+            _context.SaveChanges();
+        }
+
+        public void DeleteById(Int32 Id)
+        {
+            var toDelete = GetById(Id);
+            if (null == toDelete)
+                throw new ArgumentException("DeleteById : The provided Id does not represent any product.");
+            Delete(toDelete);
         }
     }
 }

@@ -8,12 +8,14 @@ namespace IronBank.Testing.Units.Mocks
     {
         public IList<Product> productStore = new List<Product>();
 
-        public bool Delete(Product product)
+        public void Delete(Product product)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Product> GetByCustomer(int id)
+        public void DeleteById(Int32 Id) { }
+
+        public IList<Product> GetByCustomer(int id)
         {
             throw new NotImplementedException();
         }
