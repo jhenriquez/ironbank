@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace IronBank.Models
@@ -19,39 +20,57 @@ namespace IronBank.Models
     {
         public Int32 TransactionId { get; set; }
         public Int32 ProductId { get; set; }
+        public virtual Product Product { get; set; }
         public TransactionType Type { get; set; }
         public TransactionStatus Status { get; set; }
         public Double Amount { get; set; }
+        public DateTime? CreatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
     }
-
 
     public interface ITransactionService
     {
+        System.Collections.Generic.IList<Transaction> GetByProduct(Product product);
+        System.Collections.Generic.IList<Transaction> GetByProductAndDate(Product product, DateTime? start, DateTime? end);
+        System.Collections.Generic.IList<Transaction> GetByProductId(int id);
+        System.Collections.Generic.IList<Transaction> GetByProductIdAndDate(int id, DateTime? start, DateTime? end);
+        System.Collections.Generic.IList<Transaction> GetByType(TransactionType type);
     }
 
-    public class TransactionService : ITransactionService
+
+    public class TransactionService : IronBank.Models.ITransactionService
     {
-        public IEnumerable<Transaction> GetByType(TransactionType type)
+        IronBankEntities context;
+
+        private TransactionService(IronBankEntities providedContext)
         {
-            return null;
+            this.context = providedContext;
         }
 
-        public IEnumerable<Transaction> GetByProductId(Int32 id)
+        public TransactionService() 
+            : this(new IronBankEntities()) { }
+
+        public IList<Transaction> GetByType(TransactionType type)
         {
-            return null;
+            return context.Transactions.Where((t) => t.Type == type).ToList();
         }
 
-        public IEnumerable<Transaction> GetByProduct(Product product)
+        public IList<Transaction> GetByProductId(Int32 id)
+        {
+            return context.Transactions.Where((t) => t.ProductId == id).ToList();
+        }
+
+        public IList<Transaction> GetByProduct(Product product)
         {
             return GetByProductId(product.Id);
         }
 
-        public IEnumerable<Transaction> GetByProductIdAndDate(Int32 id, DateTime? start, DateTime? end)
+        public IList<Transaction> GetByProductIdAndDate(Int32 id, DateTime? start, DateTime? end)
         {
             return null;
         }
 
-        public IEnumerable<Transaction> GetByProductAndDate(Product product, DateTime? start, DateTime? end)
+        public IList<Transaction> GetByProductAndDate(Product product, DateTime? start, DateTime? end)
         {
             return GetByProductIdAndDate(product.Id, start, end);
         }

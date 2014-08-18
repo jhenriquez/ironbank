@@ -13,7 +13,11 @@ namespace IronBank.Models
         public String LastName { get; set; }
 
         public virtual IList<Product> Products { get; set; }
-        
+
+        public DateTime? CreatedAt { get; set; }
+
+        public DateTime? UpdatedAt { get; set; }
+
         [NotMapped]
         public String FullName
         {
