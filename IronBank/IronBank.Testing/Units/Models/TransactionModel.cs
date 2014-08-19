@@ -26,7 +26,7 @@ namespace IronBank.Testing.Units.Models
         public void GetByType_ShouldActuallyReturnData_WhenExists()
         {
             // I won't create transactions here. I feel that would contaminate the test unless we really need to add a save operation on this service.
-            // So, this test depends on the data initializer.
+            // So, this test depends on the data initializer. Which I'm not sure is alright either... :(
             Assert.IsTrue(_service.GetByType(TransactionType.Credit).Count >= 3);
         }
 
@@ -51,17 +51,29 @@ namespace IronBank.Testing.Units.Models
         [TestMethod]
         public void GetByProductIdAndDate_Dates_Are_Optional()
         {
-
+            var allTransactions = _service.GetByProductId(1);
+            var allAgain = _service.GetByProductIdAndDate(1, null, null);
+            Assert.AreEqual(allTransactions.Count, allAgain.Count);
         }
 
         [TestMethod]
         public void GetByProductIdAndDate_Should_Work_With_Only_StartDate()
         {
+            var transactions = _service.GetByProductIdAndDate(1, DateTime.Today, null);
+            foreach (var transaction in transactions)
+            {
+                Assert.IsTrue(transaction.CreatedAt >= DateTime.Today);
+            }
         }
 
         [TestMethod]
         public void GetByProductIdAndDate_Should_Work_With_Only_EndDate()
         {
+            var transactions = _service.GetByProductIdAndDate(1, null, DateTime.Today);
+            foreach (var transaction in transactions)
+            {
+                Assert.IsTrue(transaction.CreatedAt <= DateTime.Today);
+            }
         }
     }
 }
