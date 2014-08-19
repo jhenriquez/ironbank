@@ -67,7 +67,20 @@ namespace IronBank.Models
 
         public IList<Transaction> GetByProductIdAndDate(Int32 id, DateTime? start, DateTime? end)
         {
-            return null;
+            if (!start.HasValue && !end.HasValue)
+                return GetByProductId(id);
+            
+            if (start.HasValue && !end.HasValue)
+                return context.Transactions.Where((t) => t.ProductId == id && t.CreatedAt >= start.Value).ToList();
+            
+            if (!start.HasValue && end.HasValue)
+                return context.Transactions.Where((t) => t.ProductId == id && t.CreatedAt <= end.Value).ToList();
+
+            return context.Transactions
+                .Where((t) => t.ProductId == id
+                    && t.CreatedAt <= end.Value
+                    && t.CreatedAt >= start.Value
+                    ).ToList();
         }
 
         public IList<Transaction> GetByProductAndDate(Product product, DateTime? start, DateTime? end)
