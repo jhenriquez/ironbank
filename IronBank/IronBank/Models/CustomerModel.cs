@@ -12,6 +12,8 @@ namespace IronBank.Models
 
         public String LastName { get; set; }
 
+        public String Email { get; set; }
+
         public virtual IList<Product> Products { get; set; }
 
         public DateTime? CreatedAt { get; set; }
