@@ -1,10 +1,17 @@
-﻿@model List<IronBank.Models.Product>
+﻿@{
+    Layout = "~/Views/Dashboard/_Layout.cshtml";
+}
 
-@System.Web.Optimization.Styles.Render("~/Content/bootstrap")
-@System.Web.Optimization.Scripts.Render("~/bundles/bootstrap")
+@model List<IronBank.Models.Product>
 
 <div class="row">
     <div class="col-xs-8 col-xs-offset-2">
         <h1 class="text-center">Hello World!</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-8 col-xs-offset-2">
+        <button class="btn btn-primary" id="menu-toggle">Toggle Menu</button>
     </div>
 </div>
