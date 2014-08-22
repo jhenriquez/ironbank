@@ -12,6 +12,12 @@ namespace IronBank.App_Start
             RouteTable.Routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             RouteTable.Routes.MapRoute(
+                name: "DefaultWebIndex",
+                url: "",
+                defaults: new { controller = "Home", action = "Index" }
+            );
+
+            RouteTable.Routes.MapRoute(
                 name: "DefaultWeb",
                 url: "{controller}/{action}/{id}",
                 defaults: new { id = UrlParameter.Optional }
