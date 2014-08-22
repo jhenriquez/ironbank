@@ -461,6 +461,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HelloController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Models\CustomerModel.cs" />
     <Compile Include="Models\IronBankEntities.cs" />
     <Compile Include="Models\IronDataInitializer.cs" />
@@ -471,7 +472,9 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <Content Include="Views\Web.config" />
-    <Content Include="Views\_Layout.cshtml" />
+    <Content Include="Views\Dashboard\_Layout.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Home\_Layout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
