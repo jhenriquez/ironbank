@@ -447,7 +447,6 @@
     <Content Include="Scripts\i18n\angular-locale_zu.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
-    <None Include="Views\Hello\World.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -460,7 +459,8 @@
     <Compile Include="App_Start\JQueryBundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\HelloController.cs" />
+    <Compile Include="Controllers\AuthController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Models\CustomerModel.cs" />
     <Compile Include="Models\IronBankEntities.cs" />
@@ -475,6 +475,7 @@
     <Content Include="Views\Dashboard\_Layout.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\_Layout.cshtml" />
+    <Content Include="Views\Dashboard\Summary.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
