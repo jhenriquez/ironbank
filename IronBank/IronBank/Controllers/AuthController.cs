@@ -1,14 +1,15 @@
-﻿using System.Security.Principal;
+﻿using IronBank.Models;
+using System;
+using System.Security.Principal;
 using System.Web.Mvc;
 using System.Web.Security;
-using IronBank.ViewModels;
 
 namespace IronBank.Controllers
 {
     public class AuthController : Controller
     {
         [HttpPost]
-        public ActionResult Login(LoginViewModel user)
+        public ActionResult Login()
         {
             return Redirect("/Dashboard/Index");
         }

@@ -7,7 +7,6 @@ namespace IronBank.Controllers {
     {
         public ActionResult Index()
         {
-            var rs = HttpContext.Response;
             return View("Summary");
         }
     }
