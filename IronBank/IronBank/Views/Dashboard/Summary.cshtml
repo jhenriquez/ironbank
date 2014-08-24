@@ -2,9 +2,10 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-4 col-md-offset-4">
+        <div class="col-md-12">
             <span class="text-center">
-                <h3>@ViewBag.Token</h3>
+                <h3>@ViewBag.User</h3>
+                <a href="@Url.Action("logout","auth")" class="btn btn-danger">Logout</a>
             </span>
         </div>
     </div>

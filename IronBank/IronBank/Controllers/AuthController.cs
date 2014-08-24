@@ -1,17 +1,34 @@
 ﻿using IronBank.Models;
-using System;
-using System.Security.Principal;
+using System.Security.Claims;
+using System.Web;
 using System.Web.Mvc;
-using System.Web.Security;
 
 namespace IronBank.Controllers
 {
     public class AuthController : Controller
     {
         [HttpPost]
-        public ActionResult Login()
+        public ActionResult Login(LoginInformation user)
         {
-            return Redirect("/Dashboard/Index");
+            var identity = new ClaimsIdentity(new[] {
+                        new Claim(ClaimTypes.Name, "Pablo"),
+                        new Claim(ClaimTypes.Email, "p@batida.com"),
+                        new Claim(ClaimTypes.Country, "Santo Domingo")
+                    },
+                    "Authorization");
+
+            Request.GetOwinContext().Authentication.SignIn(identity);
+
+            if (string.IsNullOrEmpty(user.ReturnUrl)) 
+                return Redirect(Url.Action("Index", "Dashboard"));
+
+            return Redirect(user.ReturnUrl);
+        }
+
+        public ActionResult Logout()
+        {
+            Request.GetOwinContext().Authentication.SignOut("Authorization");
+            return Redirect("/");
         }
     }
 }

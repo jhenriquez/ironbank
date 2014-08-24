@@ -1,24 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Http.Filters;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace IronBank.Models
 {
-    public class AuthenticationModel
+    public class LoginInformation
     {
-        public class CustomAuthorize : ActionFilterAttribute, IAuthenticationFilter
-        {
-            public System.Threading.Tasks.Task AuthenticateAsync(HttpAuthenticationContext context, System.Threading.CancellationToken cancellationToken)
-            {
-                throw new NotImplementedException();
-            }
-
-            public System.Threading.Tasks.Task ChallengeAsync(HttpAuthenticationChallengeContext context, System.Threading.CancellationToken cancellationToken)
-            {
-                throw new NotImplementedException();
-            }
-        }
+        [Required]
+        public string Username { get; set; }
+        [Required]
+        public string Password { get; set; }
+        public string ReturnUrl { get; set; }
     }
 }
