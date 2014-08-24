@@ -7,6 +7,7 @@ namespace IronBank.Controllers
     {
         public ActionResult Index()
         {
+            ViewBag.User = User.Identity.Name;
             return View("Summary");
         }
     }
