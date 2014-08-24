@@ -6,7 +6,6 @@ namespace IronBank.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Title = "Ironbank: Login";
             return View("Login");
         }
     }

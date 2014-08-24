@@ -2,11 +2,11 @@
 
 namespace IronBank.Controllers
 {
+    [Authorize]
     public class DashboardController : Controller
     {
         public ActionResult Index()
         {
-            ViewBag.Token = Request.Cookies["Token"].Value;
             return View("Summary");
         }
     }
