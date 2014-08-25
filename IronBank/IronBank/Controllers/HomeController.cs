@@ -6,7 +6,7 @@ namespace IronBank.Controllers
     {
         public ActionResult Index()
         {
-            return View("Login");
+            return View();
         }
     }
 }
