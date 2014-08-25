@@ -11,7 +11,7 @@ namespace IronBank
             app.UseCookieAuthentication(
                 new CookieAuthenticationOptions {
                     AuthenticationType = "Authorization",
-                    LoginPath = new PathString("/"),
+                    LoginPath = new PathString("/auth/login"),
                     ExpireTimeSpan = new System.TimeSpan(0,10,0)
                 });
         }
