@@ -4,7 +4,7 @@ using System.Web;
 using System.Web.Mvc;
 
 namespace IronBank.Controllers
-{
+{   
     public class AuthController : Controller
     {
         [HttpPost]
@@ -23,6 +23,12 @@ namespace IronBank.Controllers
                 return Redirect(Url.Action("Index", "Dashboard"));
 
             return Redirect(user.ReturnUrl);
+        }
+
+        [HttpGet]
+        public ActionResult Login()
+        {
+            return View();
         }
 
         public ActionResult Logout()
