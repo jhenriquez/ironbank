@@ -18,11 +18,9 @@ namespace IronBank.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Login(LoginInformation login)
+        public ActionResult Login(LoginInformation login)
         {
-            if (!ModelState.IsValid) return View();
-
-            var user = await UserManager.FindByEmailAsync(login.Username);                
+            var user = UserManager.Find(login.Username, login.Password);
             
             if(user == null)
             {
@@ -30,7 +28,7 @@ namespace IronBank.Controllers
                 return View();
             }
 
-            var identity = await UserManager.CreateIdentityAsync(user, "Authorization");
+            var identity = UserManager.CreateIdentity(user, "Authorization");
 
             Request.GetOwinContext().Authentication.SignIn(identity);
 
@@ -50,6 +48,12 @@ namespace IronBank.Controllers
         {
             Request.GetOwinContext().Authentication.SignOut("Authorization");
             return Redirect("/");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && UserManager != null) UserManager.Dispose();
+            base.Dispose(disposing);
         }
     }
 }
