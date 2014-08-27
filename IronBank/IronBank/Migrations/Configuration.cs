@@ -13,6 +13,7 @@ namespace IronBank.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
             ContextKey = "IronBank.Models.IronBankEntities";
         }
 
