@@ -494,6 +494,8 @@
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ServicesController.cs" />
+    <Compile Include="Controllers\TransfersController.cs" />
     <Compile Include="Migrations\201408270404270_InitialCreate.cs" />
     <Compile Include="Migrations\201408270404270_InitialCreate.Designer.cs">
       <DependentUpon>201408270404270_InitialCreate.cs</DependentUpon>
@@ -502,7 +504,6 @@
     <Compile Include="Models\AuthenticationModel.cs" />
     <Compile Include="Models\CustomerModel.cs" />
     <Compile Include="Models\IronBankEntities.cs" />
-    <Compile Include="Models\IronDataInitializer.cs" />
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\TransactionModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -515,6 +516,8 @@
     <Content Include="Views\Dashboard\Summary.cshtml" />
     <Content Include="Views\Shared\_layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Transfers\index.cshtml" />
+    <Content Include="Views\Services\index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -529,6 +532,9 @@
     <EmbeddedResource Include="Migrations\201408270404270_InitialCreate.resx">
       <DependentUpon>201408270404270_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\User\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

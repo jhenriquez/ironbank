@@ -39,13 +39,13 @@
                 <ul class="nav navbar-nav navbar-right">
                     @if (User.Identity.IsAuthenticated) {
                     <li>
-                        <a href="#">My Products</a>
+                        <a href="/Dashboard">My Products</a>
                     </li>
                     <li>
-                        <a href="#">Pay Services</a>
+                        <a href="/Services">Pay Services</a>
                     </li>
                     <li>
-                        <a href="#">Transfer Money</a>
+                        <a href="/Transfers">Transfer Money</a>
                     </li>
                     <li>
                         <a id="user-menu" data-toggle="dropdown" data-target="#" role="button" class="btn">@User.Identity.Name <span class="caret"></span></a>
