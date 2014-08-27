@@ -1,7 +1,19 @@
 ﻿@{ Layout = "~/Views/Shared/_layout.cshtml"; }
+@model IronBank.Models.LoginInformation
+
 
 <div class="row">
     <div class="col-md-4 col-md-offset-4">
+        @if (Html.ViewData.ModelState["LoginError"] != null) {
+            foreach (var error in Html.ViewData.ModelState["LoginError"].Errors) {
+            <div class="alert alert-danger text-center">@error.ErrorMessage</div>
+            }
+        }
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4 col-md-offset-4">        
         <form action="/auth/login" method="post">
             <div class="form-group">
 			    <label for="username">Username</label>

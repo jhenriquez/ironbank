@@ -1,28 +1,43 @@
 ﻿using IronBank.Models;
+using Microsoft.AspNet.Identity;
 using System.Security.Claims;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Linq;
 
 namespace IronBank.Controllers
 {   
     public class AuthController : Controller
     {
-        [HttpPost]
-        public ActionResult Login(LoginInformation user)
+        private UserManager<User> UserManager;
+
+        public AuthController()
         {
-            var identity = new ClaimsIdentity(new[] {
-                        new Claim(ClaimTypes.Name, "Pablo"),
-                        new Claim(ClaimTypes.Email, "p@batida.com"),
-                        new Claim(ClaimTypes.Country, "Santo Domingo")
-                    },
-                    "Authorization");
+            UserManager = Startup.UserManagerFactory.Invoke();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Login(LoginInformation login)
+        {
+            if (!ModelState.IsValid) return View();
+
+            var user = await UserManager.FindByEmailAsync(login.Username);                
+            
+            if(user == null)
+            {
+                ModelState.AddModelError("LoginError", "Invalid Username or Password");
+                return View();
+            }
+
+            var identity = await UserManager.CreateIdentityAsync(user, "Authorization");
 
             Request.GetOwinContext().Authentication.SignIn(identity);
 
-            if (string.IsNullOrEmpty(user.ReturnUrl)) 
+            if (string.IsNullOrEmpty(login.ReturnUrl)) 
                 return Redirect(Url.Action("Index", "Dashboard"));
 
-            return Redirect(user.ReturnUrl);
+            return Redirect(login.ReturnUrl);
         }
 
         [HttpGet]

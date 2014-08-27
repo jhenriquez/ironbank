@@ -1,11 +1,16 @@
-﻿using Microsoft.Owin;
+﻿using IronBank.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Owin;
+using System;
 
 namespace IronBank
 {
     public class Startup
     {
+        public static Func<UserManager<User>> UserManagerFactory { get; private set; }
         public void Configuration(IAppBuilder app)
         {
             app.UseCookieAuthentication(
@@ -14,6 +19,8 @@ namespace IronBank
                     LoginPath = new PathString("/auth/login"),
                     ExpireTimeSpan = new System.TimeSpan(0,10,0)
                 });
+
+            UserManagerFactory = () => { return new UserManager<User>(new UserStore<User>(new IronBankEntities())); }; 
         }
     }
 }
