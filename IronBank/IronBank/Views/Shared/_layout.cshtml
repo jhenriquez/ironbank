@@ -37,18 +37,27 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    @if (User.Identity.IsAuthenticated) {                    
+                    @if (User.Identity.IsAuthenticated) {
                     <li>
-                        <a>Pay Services</a>
+                        <a href="#">My Products</a>
                     </li>
                     <li>
-                        <a>Transfer Money</a>
+                        <a href="#">Pay Services</a>
                     </li>
                     <li>
-                        <a>Products</a>
+                        <a href="#">Transfer Money</a>
                     </li>
                     <li>
-                        <a href="/auth/logout">SignOut</a>
+                        <a id="user-menu" data-toggle="dropdown" data-target="#" role="button" class="btn">@User.Identity.Name <span class="caret"></span></a>
+                        <ul class="dropdown-menu" aria-labelledby="user-menu" role="menu">
+                            <li role="presentation">
+                                <a href="#">User Profile</a>
+                            </li>
+                            <li role="presentation" class="divider"></li>
+                            <li>
+                                <a role="presentation" href="/auth/logout">Log Out</a>
+                            </li>
+                        </ul>
                     </li>
                     } else {
                     <li>
