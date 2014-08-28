@@ -8,8 +8,8 @@ namespace IronBank.Testing.Data
     {
         protected override void Seed(IronBankEntities context)
         {
-            context.Customers.Add(new Customer { Name = "Pablo", LastName = "Batida" });
-            context.Products.Add(new Product() { Customer = context.Customers.FirstOrDefault(), Currency = ProductCurrency.Pesos, Type = ProductType.CheckingAccount });
+            context.Users.Add(new User() { UserName = "DumpUser" });
+            context.Products.Add(new Product() { Customer = context.Users.FirstOrDefault(), Currency = ProductCurrency.Pesos, Type = ProductType.CheckingAccount });
             
             /*
              * Transactions initialization data. Warning: Some tests may depend on this initialization data. 

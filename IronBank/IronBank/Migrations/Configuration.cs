@@ -12,23 +12,21 @@ namespace IronBank.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
             AutomaticMigrationDataLossAllowed = true;
-            ContextKey = "IronBank.Models.IronBankEntities";
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(IronBank.Models.IronBankEntities context)
-        {   
-            var customer = new Customer() { Name = "Pablo", LastName = "Batida" };
-            context.Customers.Add(customer);
-
-            context.Products.Add(new Product() { Customer = customer, Type = ProductType.SavingsAccount, Balance = 100 });
-
-            context.SaveChanges();
-
+        {
             var userManager = new UserManager<User>(new UserStore<User>(context));
 
-            userManager.Create(new User() { Customer = customer, UserName = "jhenriquez" }, "password");
+            userManager.Create(new User() { UserName = "jhenriquez", Name = "Julio", LastName = "Henriquez", Email = "julio.m.henriquez@gmail.com", PhoneNumber = "809-477-7857" }, "password");
+
+            var user = userManager.FindByName("jhenriquez");
+
+            context.Products.Add(new Product() { Customer = user, Type = ProductType.SavingsAccount, Balance = 100 });
+
+            context.SaveChanges();
         }
     }
 }

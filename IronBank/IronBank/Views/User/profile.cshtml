@@ -1,0 +1,21 @@
+﻿@model IronBank.Models.User
+
+@{ Layout = "~/Views/Shared/_layout.cshtml"; }
+
+<h2 class="page-header">User Profile</h2>
+
+<div class="row">
+        <div class="col-md-4">
+            <dl class="dl-horizontal">
+                <dt>First Name:</dt><dd>@Model.Name</dd>
+                <dt>Last Name:</dt><dd>@Model.LastName</dd>
+                <dt>Email Address:</dt><dd>@Model.Email</dd>
+            </dl>
+            <br />
+            <span class="pull-right">
+                <a href="/user/edit" class="btn btn-primary">
+                    Edit Information
+                </a>
+            </span>
+        </div>
+</div>

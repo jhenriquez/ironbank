@@ -26,9 +26,9 @@ namespace IronBank.Models
 
         public ProductCurrency Currency { get; set; }
 
-        public Int32 CustomerId { get; set; }
+        public string CustomerId { get; set; }
 
-        public virtual Customer Customer { get; set; }
+        public virtual User Customer { get; set; }
 
         public DateTime? CreatedAt { get; set; }
 
@@ -45,7 +45,7 @@ namespace IronBank.Models
     {
         void Delete(Product product);
         void DeleteById(Int32 id);
-        IList<Product> GetByCustomer(Int32 id);
+        IList<Product> GetByCustomer(String id);
         Product GetById(Int32 id);
         Product Save(Product product);
     }
@@ -71,7 +71,7 @@ namespace IronBank.Models
             return _context.Products.Where((p) => p.Id == id).FirstOrDefault();
         }
 
-        public IList<Product> GetByCustomer(Int32 id)
+        public IList<Product> GetByCustomer(String id)
         {
             return _context.Products.Where((p) => p.CustomerId == id).ToList();
         }

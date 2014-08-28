@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
 using System;
-using System.ComponentModel;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace IronBank.Models
 {
@@ -17,7 +18,27 @@ namespace IronBank.Models
 
     public class User : IdentityUser
     {
-        public Int32 CustomerId { get; set; }
-        public virtual Customer Customer { get; set; }
+        public String Name { get; set; }
+
+        public String LastName { get; set; }
+
+        public virtual IList<Product> Products { get; set; }
+
+        [NotMapped]
+        public String FullName
+        {
+            get
+            {
+                return Name.Trim() + " " + LastName.Trim();
+            }
+        }
+    }
+
+    public class EditableUser
+    {
+        public String Id { get; set; }
+        public String Name { get; set; }
+        public String LastName { get; set; }
+        public String Email { get; set; }
     }
 }

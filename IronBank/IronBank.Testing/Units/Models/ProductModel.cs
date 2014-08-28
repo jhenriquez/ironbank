@@ -10,13 +10,13 @@ namespace IronBank.Testing.Units.Models
     public class ProductModel
     {
         ProductService _service;
-        Customer _mockCustomer;
+        User _mockCustomer;
 
         [TestInitialize]
         public void TestInitialize()
         {
             _service = new ProductService();
-            _mockCustomer = new IronBankEntities().Customers.FirstOrDefault();
+            _mockCustomer = new IronBankEntities().Users.FirstOrDefault();
         }
 
         [TestMethod]
@@ -57,7 +57,7 @@ namespace IronBank.Testing.Units.Models
         [TestMethod]
         public void GetByCustomer_ReturnsEmptyList_WhenCustomerHasNoProducts()
         {
-            var returned = _service.GetByCustomer(10000);
+            var returned = _service.GetByCustomer("fdsdsf");
             Assert.AreEqual(returned.Count, 0);
         }
 

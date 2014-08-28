@@ -15,7 +15,7 @@ namespace IronBank.Testing.Units.Mocks
 
         public void DeleteById(Int32 Id) { }
 
-        public IList<Product> GetByCustomer(int id)
+        public IList<Product> GetByCustomer(String id)
         {
             throw new NotImplementedException();
         }
