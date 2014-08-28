@@ -1,19 +1,18 @@
 namespace IronBank.Migrations
 {
-    using IronBank.Models;
-    using Microsoft.AspNet.Identity;
-    using Microsoft.AspNet.Identity.EntityFramework;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
+    using IronBank.Models;
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
 
     internal sealed class Configuration : DbMigrationsConfiguration<IronBank.Models.IronBankEntities>
     {
         public Configuration()
         {
-            AutomaticMigrationDataLossAllowed = true;
-            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationsEnabled = false;
         }
 
         protected override void Seed(IronBankEntities context)

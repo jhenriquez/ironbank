@@ -499,13 +499,9 @@
     <Compile Include="Controllers\ServicesController.cs" />
     <Compile Include="Controllers\TransfersController.cs" />
     <Compile Include="Controllers\UserController.cs" />
-    <Compile Include="Migrations\201408280357103_InitialCreate.cs" />
-    <Compile Include="Migrations\201408280357103_InitialCreate.Designer.cs">
-      <DependentUpon>201408280357103_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201408282353463_AddedServicesModelTables.cs" />
-    <Compile Include="Migrations\201408282353463_AddedServicesModelTables.Designer.cs">
-      <DependentUpon>201408282353463_AddedServicesModelTables.cs</DependentUpon>
+    <Compile Include="Migrations\201408281305183_InitialCreate.cs" />
+    <Compile Include="Migrations\201408281305183_InitialCreate.Designer.cs">
+      <DependentUpon>201408281305183_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AuthenticationModel.cs" />
@@ -539,11 +535,8 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201408280357103_InitialCreate.resx">
-      <DependentUpon>201408280357103_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201408282353463_AddedServicesModelTables.resx">
-      <DependentUpon>201408282353463_AddedServicesModelTables.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201408281305183_InitialCreate.resx">
+      <DependentUpon>201408281305183_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
