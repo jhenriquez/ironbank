@@ -13,14 +13,17 @@ namespace IronBank.Models
 
         public DbSet<Product> Products { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
+        public DbSet<AvailableService> AvailableServices { get; set; }
+        public DbSet<ConfiguredService> ConfiguredServices { get; set; }
+        public DbSet<ConfiguredServiceInstance> ServiceInstances { get; set; }
 
-        public override int SaveChanges()
-        {
-            ChangeTracker.Entries()
-                  .Where((e) => (e.State == EntityState.Added || e.State == EntityState.Modified) && e.Entity.GetType() != typeof(User))
-                  .Select((e) => e.State == EntityState.Added ? e.Property("CreatedAt").CurrentValue = DateTime.Now : e.Property("UpdatedAt").CurrentValue = DateTime.Now).Count();
+        //public override int SaveChanges()
+        //{
+        //    ChangeTracker.Entries()
+        //          .Where((e) => (e.State == EntityState.Added || e.State == EntityState.Modified) && e. ("CreatedAt") != null && e.Property("UpdatedAt") != null)
+        //          .Select((e) => e.State == EntityState.Added ? e.Property("CreatedAt").CurrentValue = DateTime.Now : e.Property("UpdatedAt").CurrentValue = DateTime.Now).Count();
 
-            return base.SaveChanges();
-        }        
+        //    return base.SaveChanges();
+        //}        
     }
 }

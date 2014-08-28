@@ -505,6 +505,7 @@
     <Compile Include="Models\AuthenticationModel.cs" />
     <Compile Include="Models\IronBankEntities.cs" />
     <Compile Include="Models\ProductModel.cs" />
+    <Compile Include="Models\ServicesModel.cs" />
     <Compile Include="Models\TransactionModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
