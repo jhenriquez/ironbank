@@ -501,6 +501,10 @@
     <Compile Include="Migrations\201408280357103_InitialCreate.Designer.cs">
       <DependentUpon>201408280357103_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201408282353463_AddedServicesModelTables.cs" />
+    <Compile Include="Migrations\201408282353463_AddedServicesModelTables.Designer.cs">
+      <DependentUpon>201408282353463_AddedServicesModelTables.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AuthenticationModel.cs" />
     <Compile Include="Models\IronBankEntities.cs" />
@@ -534,6 +538,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201408280357103_InitialCreate.resx">
       <DependentUpon>201408280357103_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408282353463_AddedServicesModelTables.resx">
+      <DependentUpon>201408282353463_AddedServicesModelTables.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

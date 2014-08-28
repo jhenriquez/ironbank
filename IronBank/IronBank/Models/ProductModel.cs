@@ -30,10 +30,6 @@ namespace IronBank.Models
 
         public virtual User Customer { get; set; }
 
-        public DateTime? CreatedAt { get; set; }
-
-        public DateTime? UpdatedAt { get; set; }
-
         [NotMapped]
         public Double Balance { get; set; }
 

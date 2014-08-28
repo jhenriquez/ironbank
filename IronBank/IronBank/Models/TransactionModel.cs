@@ -25,7 +25,6 @@ namespace IronBank.Models
         public TransactionStatus Status { get; set; }
         public Double Amount { get; set; }
         public DateTime? CreatedAt { get; set; }
-        public DateTime? UpdatedAt { get; set; }
     }
 
     public interface ITransactionService
