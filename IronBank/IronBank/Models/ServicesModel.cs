@@ -21,8 +21,7 @@ namespace IronBank.Models
         public Int32 ServiceId { get; set; }
         public virtual AvailableService Service { get; set; }
         public IList<ConfiguredServiceInstance> Instances { get; set; }
-        public DateTime? CreatedAt { get; set; }
-        public DateTime? UpdateAt { get; set; }
+        public String ContractReference { get; set; }
 
         [NotMapped]
         public Boolean HasPendingInstances

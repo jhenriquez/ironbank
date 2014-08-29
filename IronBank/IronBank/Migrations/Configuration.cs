@@ -16,17 +16,33 @@ namespace IronBank.Migrations
             AutomaticMigrationsEnabled = true;
         }
 
-        protected override void Seed(IronBank.Models.IronBankEntities context)
+        protected override void Seed(IronBankEntities context)
+        {
+            SeedDefaultUser(context);
+            SeedProductsForDefaultUser(context);
+            SeedAvailableServices(context);
+            context.SaveChanges();
+        }
+
+        public void SeedDefaultUser(IronBankEntities context)
         {
             var userManager = new UserManager<User>(new UserStore<User>(context));
-
             userManager.Create(new User() { UserName = "jhenriquez", Name = "Julio", LastName = "Henriquez", Email = "julio.m.henriquez@gmail.com", PhoneNumber = "809-477-7857" }, "password");
+        }
 
+        public void SeedProductsForDefaultUser(IronBankEntities context)
+        {
+            var userManager = new UserManager<User>(new UserStore<User>(context));
             var user = userManager.FindByName("jhenriquez");
-
             context.Products.Add(new Product() { Customer = user, Type = ProductType.SavingsAccount, Balance = 100 });
+        }
 
-            context.SaveChanges();
+        public void SeedAvailableServices(IronBankEntities context)
+        {
+            context.AvailableServices.Add(new AvailableService() { Name = "Tricom", Description = "Telecommunications Provider" });
+            context.AvailableServices.Add(new AvailableService() { Name = "Claro", Description = "Telecommunications Provider" });
+            context.AvailableServices.Add(new AvailableService() { Name = "Orange", Description = "Telecommunications Provider" });
+            context.AvailableServices.Add(new AvailableService() { Name = "Viva", Description = "Telecommunications Provider" });
         }
     }
 }
