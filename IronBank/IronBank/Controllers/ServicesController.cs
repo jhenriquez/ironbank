@@ -16,7 +16,7 @@ namespace IronBank.Controllers
         [HttpGet]
         public ActionResult Configure()
         {
-            return View(db.AvailableServices.ToList());
+            return View(new ServiceConfiguration() { AvailableServices = db.AvailableServices.ToList() });
         }
 
         [HttpPost]
@@ -26,7 +26,7 @@ namespace IronBank.Controllers
 
             UpdateModel<ConfiguredService>(newService);
 
-            newService.User = await UserManager.FindByNameAsync(User.Identity.Name);
+            newService.User = db.Users.Where((u) => u.UserName == User.Identity.Name).FirstOrDefault();
 
             var isExistentConfiguration = db
                 .ConfiguredServices.Where((s) =>
@@ -36,7 +36,8 @@ namespace IronBank.Controllers
             if (isExistentConfiguration)
             {
                 ModelState.AddModelError("Configuration", "Service Contract Already In Place.");
-                return View();
+                model.AvailableServices = db.AvailableServices.ToList();
+                return View(model);
             }
 
             db.ConfiguredServices.Add(newService);

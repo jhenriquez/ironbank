@@ -64,6 +64,7 @@ namespace IronBank.Models
     {
         public Int32 ServiceId { get; set; }
         public String ContractReference { get; set; }
+        public IList<AvailableService> AvailableServices { get; set; }
     }
 
     #endregion
