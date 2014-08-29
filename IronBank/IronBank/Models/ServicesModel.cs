@@ -20,7 +20,7 @@ namespace IronBank.Models
         public virtual User User { get; set; }
         public Int32 ServiceId { get; set; }
         public virtual AvailableService Service { get; set; }
-        public IList<ConfiguredServiceInstance> Instances { get; set; }
+        public virtual IList<ConfiguredServiceInstance> Instances { get; set; }
         public String ContractReference { get; set; }
 
         [NotMapped]
@@ -28,6 +28,8 @@ namespace IronBank.Models
         {
             get
             {
+                if (Instances == null)
+                    return false;
                 return Instances.Where((i) => i.IsPending).Count() > 0;
             }
         }
@@ -55,4 +57,14 @@ namespace IronBank.Models
             }
         }
     }
+
+    #region View Models
+
+    public class ServiceConfiguration
+    {
+        public Int32 ServiceId { get; set; }
+        public String ContractReference { get; set; }
+    }
+
+    #endregion
 }

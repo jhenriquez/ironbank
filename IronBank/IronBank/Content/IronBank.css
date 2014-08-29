@@ -1,0 +1,33 @@
+﻿.service-container {
+    margin: 10px;
+    padding: 5px;
+    transition: all ease-in-out 1s;
+    -webkit-transition: all ease-in-out 1s;
+    -moz-transition: all ease-in-out 1s;
+    -o-transition: all ease-in-out 1s;
+}
+
+    .service-container:hover {
+        background: #7ac1ff;
+        border-radius: 10px 5px;
+        border: none;
+    }
+
+.service-name {
+    font-family: Gill Sans, Verdana;
+    font-size: 11px;
+    line-height: 14px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: bold;
+    color: black;
+}
+
+.service-description {
+    font-family:Verdana;
+    font-size: 10px;
+    line-height: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: black;
+}
