@@ -1,14 +1,19 @@
 ﻿using System.Web.Mvc;
+using System.Linq;
+using IronBank.Models;
 
 namespace IronBank.Controllers
 {
     [Authorize]
-    public class DashboardController : Controller
+    public class DashboardController : IronController
     {
         public ActionResult Index()
         {
-            ViewBag.User = User.Identity.Name;
-            return View("Summary");
+            var products = new ProductService(db).GetByCustomer(
+                                                    db.Users.Where(u => u.UserName == User.Identity.Name)
+                                                    .FirstOrDefault()
+                                                    .Id);
+            return View(products);
         }
     }
 }

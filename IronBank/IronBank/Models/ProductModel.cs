@@ -9,7 +9,6 @@ namespace IronBank.Models
     {
         SavingsAccount,
         CheckingAccount,
-        CreditCard
     }
 
     public enum ProductCurrency
@@ -28,9 +27,10 @@ namespace IronBank.Models
 
         public string CustomerId { get; set; }
 
+        public string AccountNumber { get; set; }
+
         public virtual User Customer { get; set; }
 
-        [NotMapped]
         public Double Balance { get; set; }
 
         [NotMapped]
@@ -52,8 +52,9 @@ namespace IronBank.Models
     {
         private IronBankEntities _context;
         private ITransactionService _transactionService;
+        private AccountNumberGenerator generator = new AccountNumberGenerator();
 
-        private ProductService(IronBankEntities context)
+        public ProductService(IronBankEntities context)
         {
             if (context == null)
                 throw new ArgumentNullException("ProductService Constructor: context can not be null.");
@@ -102,7 +103,9 @@ namespace IronBank.Models
             if (Double.IsNaN(balance)) throw new ArgumentNullException("Create: balance should be a valid number.");
             if (balance <= 0) throw new InvalidOperationException("Create: balance should be a positive number greater than zero.");
 
-            return Save(new Product() { CustomerId = customerId, Balance = balance, Currency = currency, Type = type });
+            var product = new Product() { CustomerId = customerId, Balance = balance, Currency = currency, Type = type, AccountNumber = generator.Generate() };
+            _context.Transactions.Add(new Transaction() { Amount = balance, CreatedAt = DateTime.Now, Product = product, Status = TransactionStatus.Completed, Type = TransactionType.Credit });
+            return Save(product);
         }
 
         public Product Create(User customer, ProductType type, ProductCurrency currency, Double balance)
@@ -111,4 +114,22 @@ namespace IronBank.Models
         }
     }
 
+    public class AccountNumberGenerator
+    {
+        private Random generator = new Random((int)DateTime.Now.Ticks);
+
+        public String Generate(int digits)
+        {
+            var account = "";
+
+            do { account += generator.Next(50,300).ToString(); } while (account.Length < digits);
+
+            return account.Substring(0, digits);
+        }
+
+        public String Generate()
+        {
+            return Generate(10);
+        }
+    }
 }

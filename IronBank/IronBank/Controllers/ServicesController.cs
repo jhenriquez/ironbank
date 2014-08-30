@@ -10,7 +10,7 @@ namespace IronBank.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            return View(db.ConfiguredServices.ToList());
         }
 
         [HttpGet]

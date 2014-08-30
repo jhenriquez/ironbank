@@ -29,11 +29,11 @@ namespace IronBank.Models
 
     public interface ITransactionService
     {
-        System.Collections.Generic.IList<Transaction> GetByProduct(Product product);
-        System.Collections.Generic.IList<Transaction> GetByProductAndDate(Product product, DateTime? start, DateTime? end);
-        System.Collections.Generic.IList<Transaction> GetByProductId(int id);
-        System.Collections.Generic.IList<Transaction> GetByProductIdAndDate(int id, DateTime? start, DateTime? end);
-        System.Collections.Generic.IList<Transaction> GetByType(TransactionType type);
+        IList<Transaction> GetByProduct(Product product);
+        IList<Transaction> GetByProductAndDate(Product product, DateTime? start, DateTime? end);
+        IList<Transaction> GetByProductId(int id);
+        IList<Transaction> GetByProductIdAndDate(int id, DateTime? start, DateTime? end);
+        IList<Transaction> GetByType(TransactionType type);
     }
 
 
