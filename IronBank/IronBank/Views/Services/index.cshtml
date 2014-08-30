@@ -1,13 +1,22 @@
 ﻿@{ Layout = "~/Views/Shared/_layout.cshtml"; }
 
+@model System.Collections.Generic.IList<IronBank.Models.ConfiguredService>
+
 <div class="row">
-    <div class="col-md-12">
-        <div class="jumbotron">
-            <h1>Services</h1>
-            <p>
-                This is the service area of the site. As you can see, it's not available yet but I promise it will be soon!
-                From here you'll be able to register services and pay them.
-            </p>
-        </div>
+    <div class="col-md-8 col-md-offset-2">
+        <table class="table table-hover">
+            <tr>
+                <th>Service Name</th>
+                <th>Contract Reference</th>
+            </tr>
+            @foreach (var cfgService in Model) {
+            <tr>
+                <td>@cfgService.Service.Name</td>
+                <td>@cfgService.ContractReference</td>
+            </tr>
+            }
+        </table>
+        @foreach (var service in Model) {
+        }
     </div>
 </div>

@@ -31,9 +31,12 @@ namespace IronBank.Migrations
 
         public void SeedProductsForDefaultUser(IronBankEntities context)
         {
+            var productService = new ProductService(context);
             var userManager = new UserManager<User>(new UserStore<User>(context));
             var user = userManager.FindByName("jhenriquez");
-            context.Products.Add(new Product() { Customer = user, Type = ProductType.SavingsAccount, Balance = 100 });
+
+            productService.Create(user, ProductType.SavingsAccount, ProductCurrency.Pesos, 1000.00);
+            productService.Create(user, ProductType.CheckingAccount, ProductCurrency.Pesos, 2000.00);
         }
 
         public void SeedAvailableServices(IronBankEntities context)

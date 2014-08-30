@@ -39,7 +39,7 @@ namespace IronBank.Testing.Units.Models
         [TestMethod]
         public void GetById_Retreives_PreviouslySavedObject()
         {
-            var newp = new Product() { CustomerId = _mockCustomer.Id, Type = ProductType.CreditCard };
+            var newp = new Product() { CustomerId = _mockCustomer.Id, Type = ProductType.CheckingAccount };
             var saved = _service.Save(newp);
             var returned = _service.GetById(saved.Id);
 
@@ -66,7 +66,7 @@ namespace IronBank.Testing.Units.Models
         {
             var new_one = new Product() { CustomerId = _mockCustomer.Id, Type = ProductType.SavingsAccount };
             var new_two = new Product() { CustomerId = _mockCustomer.Id, Type = ProductType.CheckingAccount };
-            var new_three = new Product() { CustomerId = _mockCustomer.Id, Type = ProductType.CreditCard };
+            var new_three = new Product() { CustomerId = _mockCustomer.Id, Type = ProductType.CheckingAccount };
             _service.Save(new_one);
             _service.Save(new_two);
             _service.Save(new_three);
@@ -78,7 +78,7 @@ namespace IronBank.Testing.Units.Models
         [TestMethod]
         public void Delete_RemovesAnEntity()
         {
-            var toDelete = new Product() { CustomerId = _mockCustomer.Id, Type = ProductType.CreditCard };
+            var toDelete = new Product() { CustomerId = _mockCustomer.Id, Type = ProductType.SavingsAccount };
             _service.Save(toDelete);
             var checkSaved = _service.GetById(toDelete.Id);
             Assert.IsNotNull(checkSaved);
@@ -90,7 +90,7 @@ namespace IronBank.Testing.Units.Models
         [TestMethod]
         public void DeleteById_RemovesAnEntity()
         {
-            var toDelete = new Product() { CustomerId = _mockCustomer.Id, Type = ProductType.CreditCard };
+            var toDelete = new Product() { CustomerId = _mockCustomer.Id, Type = ProductType.SavingsAccount };
             _service.Save(toDelete);
             _service.DeleteById(toDelete.Id);
             var checkDeleted = _service.GetById(toDelete.Id);

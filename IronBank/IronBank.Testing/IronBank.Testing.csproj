@@ -72,6 +72,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Units\Mocks\InMemoryProductService.cs" />
     <Compile Include="Units\Models\ProductModel.cs" />
+    <Compile Include="Units\Models\ProductModel_AccountGenerator.cs" />
     <Compile Include="Units\Models\TransactionModel.cs" />
   </ItemGroup>
   <ItemGroup>
