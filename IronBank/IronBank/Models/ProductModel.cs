@@ -44,6 +44,8 @@ namespace IronBank.Models
         IList<Product> GetByCustomer(String id);
         Product GetById(Int32 id);
         Product Save(Product product);
+        Product Create(String customerId, ProductType type, ProductCurrency currency, Double balance);
+        Product Create(User customer, ProductType type, ProductCurrency currency, Double balance);
     }
 
     public class ProductService : IProductService
@@ -92,5 +94,21 @@ namespace IronBank.Models
                 throw new ArgumentException("DeleteById : The provided Id does not represent any product.");
             Delete(toDelete);
         }
+
+        public Product Create(String customerId, ProductType type, ProductCurrency currency, Double balance)
+        {
+            if (String.IsNullOrEmpty(customerId)) throw new ArgumentNullException("Create: customerId can not be null or empty.");
+            if (Double.IsNaN(balance)) throw new ArgumentNullException("Create: balance should be a valid number.");
+            if (Double.IsNaN(balance)) throw new ArgumentNullException("Create: balance should be a valid number.");
+            if (balance <= 0) throw new InvalidOperationException("Create: balance should be a positive number greater than zero.");
+
+            return Save(new Product() { CustomerId = customerId, Balance = balance, Currency = currency, Type = type });
+        }
+
+        public Product Create(User customer, ProductType type, ProductCurrency currency, Double balance)
+        {
+            return Create(customer.Id, type, currency, balance);
+        }
     }
+
 }

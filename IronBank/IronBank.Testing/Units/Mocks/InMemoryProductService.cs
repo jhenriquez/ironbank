@@ -29,5 +29,15 @@ namespace IronBank.Testing.Units.Mocks
         {
             throw new NotImplementedException();
         }
+
+        public Product Create(String customerId, ProductType type, ProductCurrency currency, Double balance)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Product Create(User customer, ProductType type, ProductCurrency currency, Double balance)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
