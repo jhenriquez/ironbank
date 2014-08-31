@@ -28,6 +28,7 @@ namespace IronBank.Migrations
         {
             var userManager = new UserManager<User>(new UserStore<User>(context));
             userManager.Create(new User() { UserName = "jhenriquez", Name = "Julio", LastName = "Henriquez", Email = "julio.m.henriquez@gmail.com", PhoneNumber = "809-477-7857" }, "password");
+            userManager.Create(new User() { UserName = "csanchez", Name = "Claudio", LastName = "Sanchez", Email = "csanchez@megsoftconsulting.com", PhoneNumber = "" }, "password");
         }
 
         public void SeedProductsForDefaultUser(IronBankEntities context)
