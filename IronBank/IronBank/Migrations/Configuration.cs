@@ -20,6 +20,7 @@ namespace IronBank.Migrations
             SeedDefaultUser(context);
             SeedProductsForDefaultUser(context);
             SeedAvailableServices(context);
+            SeedConfiguredServices(context);
             context.SaveChanges();
         }
 
@@ -45,6 +46,22 @@ namespace IronBank.Migrations
             context.AvailableServices.Add(new AvailableService() { Name = "Claro", Description = "Telecommunications Provider" });
             context.AvailableServices.Add(new AvailableService() { Name = "Orange", Description = "Telecommunications Provider" });
             context.AvailableServices.Add(new AvailableService() { Name = "Viva", Description = "Telecommunications Provider" });
+            context.SaveChanges();
+        }
+
+        public void SeedConfiguredServices(IronBankEntities context)
+        {
+            var userManager = new UserManager<User>(new UserStore<User>(context));
+            var user = userManager.FindByName("jhenriquez");
+            context.ConfiguredServices.Add(new ConfiguredService() { Service = context.AvailableServices.FirstOrDefault(), User = user, ContractReference = "8094777857" });
+            context.ServiceInstances.Add(
+                new ConfiguredServiceInstance() { 
+                    Configuration = context.ConfiguredServices.FirstOrDefault(),
+                    GeneratedAt = DateTime.Now,
+                    IsPending = true,
+                    Amount = 1492.00,
+                    PayBefore = DateTime.Now.AddDays(2)  }
+                );
         }
     }
 }

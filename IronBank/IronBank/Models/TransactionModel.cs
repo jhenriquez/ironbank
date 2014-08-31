@@ -19,7 +19,9 @@ namespace IronBank.Models
     public class Transaction
     {
         public Int32 TransactionId { get; set; }
+        public String Number { get; set; }
         public Int32 ProductId { get; set; }
+        public String Description { get; set; }
         public virtual Product Product { get; set; }
         public TransactionType Type { get; set; }
         public TransactionStatus Status { get; set; }
@@ -34,6 +36,7 @@ namespace IronBank.Models
         IList<Transaction> GetByProductId(int id);
         IList<Transaction> GetByProductIdAndDate(int id, DateTime? start, DateTime? end);
         IList<Transaction> GetByType(TransactionType type);
+        IList<Transaction> GetByProductAccount(String accountNumber);
     }
 
 
@@ -41,7 +44,7 @@ namespace IronBank.Models
     {
         IronBankEntities context;
 
-        private TransactionService(IronBankEntities providedContext)
+        public TransactionService(IronBankEntities providedContext)
         {
             this.context = providedContext;
         }
@@ -85,6 +88,11 @@ namespace IronBank.Models
         public IList<Transaction> GetByProductAndDate(Product product, DateTime? start, DateTime? end)
         {
             return GetByProductIdAndDate(product.Id, start, end);
+        }
+
+        public IList<Transaction> GetByProductAccount(String accountNumber)
+        {
+            return context.Transactions.Where((t) => t.Product.AccountNumber == accountNumber).ToList();
         }
     }
 }

@@ -33,6 +33,17 @@ namespace IronBank.Models
                 return Instances.Where((i) => i.IsPending).Count() > 0;
             }
         }
+
+        [NotMapped]
+        public Double PendingBalance
+        {
+            get
+            {
+                if (!HasPendingInstances)
+                    return 0.00;
+                return Instances.Where((i) => i.IsPending).Sum((i) => i.Amount);
+            }
+        }
     }
 
     public class ConfiguredServiceInstance

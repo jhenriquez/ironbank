@@ -104,32 +104,13 @@ namespace IronBank.Models
             if (balance <= 0) throw new InvalidOperationException("Create: balance should be a positive number greater than zero.");
 
             var product = new Product() { CustomerId = customerId, Balance = balance, Currency = currency, Type = type, AccountNumber = generator.Generate() };
-            _context.Transactions.Add(new Transaction() { Amount = balance, CreatedAt = DateTime.Now, Product = product, Status = TransactionStatus.Completed, Type = TransactionType.Credit });
+            _context.Transactions.Add(new Transaction() { Amount = balance, CreatedAt = DateTime.Now, Product = product, Status = TransactionStatus.Completed, Type = TransactionType.Credit, Number = generator.Generate(15), Description = "Opening Balance Deposit" });
             return Save(product);
         }
 
         public Product Create(User customer, ProductType type, ProductCurrency currency, Double balance)
         {
             return Create(customer.Id, type, currency, balance);
-        }
-    }
-
-    public class AccountNumberGenerator
-    {
-        private Random generator = new Random((int)DateTime.Now.Ticks);
-
-        public String Generate(int digits)
-        {
-            var account = "";
-
-            do { account += generator.Next(50,300).ToString(); } while (account.Length < digits);
-
-            return account.Substring(0, digits);
-        }
-
-        public String Generate()
-        {
-            return Generate(10);
         }
     }
 }

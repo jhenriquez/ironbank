@@ -19,7 +19,11 @@
                 <label for="ServiceId">Service Provider</label>
                 <select name="ServiceId" class="form-control">
                 @foreach (var service in Model.AvailableServices) {
+                    if (Model.ServiceId == service.Id) {
+                    <option value="@service.Id" selected>@service.Name</option>
+                    } else {
                     <option value="@service.Id">@service.Name</option>
+                    }
                 }
                 </select>
             </div>

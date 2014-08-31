@@ -1,0 +1,35 @@
+﻿@{ Layout = "~/Views/Shared/_layout.cshtml"; }
+
+@model System.Collections.Generic.IList<IronBank.Models.Transaction>
+
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <tr>
+                    <th>Date</th>
+                    <th>Transaction Number</th>
+                    <th>Description</th>
+                    <th>Type</th>
+                    <th>Amount</th>
+                </tr>
+                @foreach (var transaction in Model) {
+                <tr>
+                    <td>@transaction.CreatedAt</td>
+                    <td>@transaction.Number</td>
+                    <td>@transaction.Description</td>
+                    @if (transaction.Type == IronBank.Models.TransactionType.Credit) {
+                    <td>Credit</td>
+                    } else {
+                    <td>Debit</td>
+                    }
+                    <td>@transaction.Amount</td>
+                </tr>
+                }
+            </table>
+        </div>
+        <span class="pull-right">
+            <a class="btn btn-primary" href="/Dashboard">Back To My Products</a>
+        </span>
+    </div>
+</div>

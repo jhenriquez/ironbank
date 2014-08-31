@@ -4,27 +4,31 @@
 
 <div class="row">
     <div class="col-md-8 col-md-offset-2">
-        <table class="table table-hover">
-            <tr>
-                <th>Account Number</th>
-                <th>Account Type</th>
-                <th>Balance</th>
-            </tr>
-            @foreach (var acc in Model) {
-            <tr>
-                <td>@acc.AccountNumber</td>
-                @if (acc.Type == IronBank.Models.ProductType.SavingsAccount) {
-                <td>Savings</td>
-                } else {
-                <td>Checking</td>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <tr>
+                    <th>Account Number</th>
+                    <th>Account Type</th>
+                    <th>Balance</th>
+                </tr>
+                @foreach (var acc in Model) {
+                <tr>
+                    <td>@acc.AccountNumber</td>
+                    @if (acc.Type == IronBank.Models.ProductType.SavingsAccount) {
+                    <td>Savings</td>
+                    } else {
+                    <td>Checking</td>
+                    }
+                    <td>
+                        @if (acc.Currency == IronBank.Models.ProductCurrency.Dollars) {
+                            <a href="/transactions/index/@acc.AccountNumber">(USD) @acc.Balance</a>
+                        } else {
+                            <a href="/transactions/index/@acc.AccountNumber">(DOP) @acc.Balance</a>
+                        }
+                    </td>
+                </tr>
                 }
-                @if (acc.Currency == IronBank.Models.ProductCurrency.Dollars) {
-                <td>(USD) @acc.Balance</td>
-                } else {
-                <td>(DOP) @acc.Balance</td>
-                }
-            </tr>
-            }
-        </table>
+            </table>
+        </div>
     </div>
 </div>

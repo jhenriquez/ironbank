@@ -191,6 +191,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IronController.cs" />
     <Compile Include="Controllers\ServicesController.cs" />
+    <Compile Include="Controllers\TransactionsController.cs" />
     <Compile Include="Controllers\TransfersController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Migrations\201408281305183_InitialCreate.cs" />
@@ -205,7 +206,16 @@
     <Compile Include="Migrations\201408300439422_AddProductBalanceField.Designer.cs">
       <DependentUpon>201408300439422_AddProductBalanceField.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201408311406205_AddTransactionNumber.cs" />
+    <Compile Include="Migrations\201408311406205_AddTransactionNumber.Designer.cs">
+      <DependentUpon>201408311406205_AddTransactionNumber.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201408311430250_AddTransactionDescription.cs" />
+    <Compile Include="Migrations\201408311430250_AddTransactionDescription.Designer.cs">
+      <DependentUpon>201408311430250_AddTransactionDescription.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AccountNumberGenerator.cs" />
     <Compile Include="Models\AuthenticationModel.cs" />
     <Compile Include="Models\IronBankEntities.cs" />
     <Compile Include="Models\ProductModel.cs" />
@@ -227,6 +237,7 @@
     <Content Include="Views\User\edit.cshtml" />
     <Content Include="Views\Services\configure.cshtml" />
     <Content Include="Views\Dashboard\index.cshtml" />
+    <Content Include="Views\Transactions\index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -246,6 +257,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201408300439422_AddProductBalanceField.resx">
       <DependentUpon>201408300439422_AddProductBalanceField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408311406205_AddTransactionNumber.resx">
+      <DependentUpon>201408311406205_AddTransactionNumber.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408311430250_AddTransactionDescription.resx">
+      <DependentUpon>201408311430250_AddTransactionDescription.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

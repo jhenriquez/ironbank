@@ -8,15 +8,23 @@
             <tr>
                 <th>Service Name</th>
                 <th>Contract Reference</th>
+                <th>Pending Balance</th>
             </tr>
             @foreach (var cfgService in Model) {
             <tr>
                 <td>@cfgService.Service.Name</td>
                 <td>@cfgService.ContractReference</td>
+                @if (cfgService.PendingBalance == 0)
+                {
+                <td>--</td>
+                } else {
+                <td><i class="fa-money">@cfgService.PendingBalance</i></td>
+                }
             </tr>
             }
         </table>
-        @foreach (var service in Model) {
-        }
+        <span class="pull-right">
+            <a href="/services/configure" class="btn btn-primary">Configure New Service</a>
+        </span>
     </div>
 </div>
