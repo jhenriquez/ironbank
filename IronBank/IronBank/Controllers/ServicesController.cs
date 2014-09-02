@@ -11,7 +11,7 @@ namespace IronBank.Controllers
         public ActionResult Index()
         {
             return View(
-                db.ConfiguredServices.Where((s) => s.User.UserName ==  User.Identity.Name) // I know... needs refactoring...
+                db.ConfiguredServices.Where((s) => s.User.UserName ==  User.Identity.Name).ToList() // I know... needs refactoring...
                 );
         }
 
