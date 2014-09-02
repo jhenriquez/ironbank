@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
@@ -12,6 +13,9 @@ namespace IronBank.App_Start
     {
         public static void Register()
         {
+            var migrator = new DbMigrator(new IronBank.Migrations.Configuration());
+            migrator.Update();
+
             GlobalConfiguration.Configuration.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
