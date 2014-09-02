@@ -8,7 +8,7 @@ namespace IronBank.App_Start
     {
         public static void RegisterBundles()
         {
-            BundleTable.Bundles.Add(new ScriptBundle("~/bundles/jquery-1.9.1").Include("~/Scripts/jquery-1.9.1.js"));
+            BundleTable.Bundles.Add(new ScriptBundle("~/bundles/jquery").Include("~/Scripts/jquery-1.9.1.js"));
         }
     }
 }
