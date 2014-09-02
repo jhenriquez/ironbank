@@ -18,7 +18,7 @@ namespace IronBank.Migrations
         protected override void Seed(IronBankEntities context)
         {
             SeedDefaultUser(context);
-            SeedProductsForDefaultUser(context);
+            SeedProductsForDefaultUsers(context);
             SeedAvailableServices(context);
             SeedConfiguredServices(context);
             context.SaveChanges();
@@ -31,7 +31,7 @@ namespace IronBank.Migrations
             userManager.Create(new User() { UserName = "csanchez", Name = "Claudio", LastName = "Sanchez", Email = "csanchez@megsoftconsulting.com", PhoneNumber = "" }, "password");
         }
 
-        public void SeedProductsForDefaultUser(IronBankEntities context)
+        public void SeedProductsForDefaultUsers(IronBankEntities context)
         {
             var productService = new ProductService(context);
             var userManager = new UserManager<User>(new UserStore<User>(context));
@@ -39,6 +39,11 @@ namespace IronBank.Migrations
 
             productService.Create(user, ProductType.SavingsAccount, ProductCurrency.Pesos, 1000.00);
             productService.Create(user, ProductType.CheckingAccount, ProductCurrency.Pesos, 2000.00);
+
+            user = userManager.FindByName("csanchez");
+
+            productService.Create(user, ProductType.SavingsAccount, ProductCurrency.Pesos, 25000.00);
+            productService.Create(user, ProductType.CheckingAccount, ProductCurrency.Pesos, 50000.00);
         }
 
         public void SeedAvailableServices(IronBankEntities context)
