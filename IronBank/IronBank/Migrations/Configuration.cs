@@ -35,12 +35,17 @@ namespace IronBank.Migrations
         {
             var productService = new ProductService(context);
             var userManager = new UserManager<User>(new UserStore<User>(context));
+
             var user = userManager.FindByName("jhenriquez");
+
+            if (productService.GetByCustomer(user.Id).Count > 0) return;
 
             productService.Create(user, ProductType.SavingsAccount, ProductCurrency.Pesos, 1000.00);
             productService.Create(user, ProductType.CheckingAccount, ProductCurrency.Pesos, 2000.00);
 
             user = userManager.FindByName("csanchez");
+
+            if (productService.GetByCustomer(user.Id).Count > 0) return;
 
             productService.Create(user, ProductType.SavingsAccount, ProductCurrency.Pesos, 25000.00);
             productService.Create(user, ProductType.CheckingAccount, ProductCurrency.Pesos, 50000.00);
@@ -48,6 +53,7 @@ namespace IronBank.Migrations
 
         public void SeedAvailableServices(IronBankEntities context)
         {
+            if (context.AvailableServices.Count() > 0) return;
             context.AvailableServices.Add(new AvailableService() { Name = "Tricom", Description = "Telecommunications Provider" });
             context.AvailableServices.Add(new AvailableService() { Name = "Claro", Description = "Telecommunications Provider" });
             context.AvailableServices.Add(new AvailableService() { Name = "Orange", Description = "Telecommunications Provider" });
@@ -59,7 +65,9 @@ namespace IronBank.Migrations
         {
             var userManager = new UserManager<User>(new UserStore<User>(context));
             var user = userManager.FindByName("jhenriquez");
+
             context.ConfiguredServices.Add(new ConfiguredService() { Service = context.AvailableServices.FirstOrDefault(), User = user, ContractReference = "8094777857" });
+
             context.ServiceInstances.Add(
                 new ConfiguredServiceInstance() { 
                     Configuration = context.ConfiguredServices.FirstOrDefault(),
