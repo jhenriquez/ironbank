@@ -1,41 +1,30 @@
 ﻿using IronBank.Models;
+using IronBank.ViewModels;
 using Microsoft.AspNet.Identity;
-using System.Security.Claims;
-using System.Threading.Tasks;
+using System;
 using System.Web;
 using System.Web.Mvc;
-using System.Linq;
 
 namespace IronBank.Controllers
 {   
-    public class AuthController : Controller
-    {
-        private UserManager<User> UserManager;
-
-        public AuthController()
-        {
-            UserManager = Startup.UserManagerFactory.Invoke();
-        }
+    public class AuthController : IronController {
 
         [HttpPost]
         public ActionResult Login(LoginInformation login)
         {
-            var user = UserManager.Find(login.Username, login.Password);
-            
-            if(user == null)
+            try
             {
-                ModelState.AddModelError("LoginError", "Invalid Username or Password");
-                return View();
+                Authentication.LogIn(login.Username, login.Password);
+
+                if (string.IsNullOrEmpty(login.ReturnUrl))
+                    return Redirect(Url.Action("Index", "Dashboard"));
+
+                return Redirect(login.ReturnUrl);
             }
-
-            var identity = UserManager.CreateIdentity(user, "Authorization");
-
-            Request.GetOwinContext().Authentication.SignIn(identity);
-
-            if (string.IsNullOrEmpty(login.ReturnUrl)) 
-                return Redirect(Url.Action("Index", "Dashboard"));
-
-            return Redirect(login.ReturnUrl);
+            catch (Exception x)
+            {
+                return View(login);
+            }
         }
 
         [HttpGet]
@@ -46,14 +35,9 @@ namespace IronBank.Controllers
 
         public ActionResult Logout()
         {
-            Request.GetOwinContext().Authentication.SignOut("Authorization");
-            return Redirect("/");
-        }
+            Authentication.LogOut();
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && UserManager != null) UserManager.Dispose();
-            base.Dispose(disposing);
+            return Redirect("/");
         }
     }
 }

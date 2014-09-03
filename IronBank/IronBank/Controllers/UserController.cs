@@ -1,4 +1,5 @@
 ﻿using IronBank.Models;
+using IronBank.ViewModels;
 using Microsoft.AspNet.Identity;
 using System.Data.Entity.Validation;
 using System.Web.Mvc;

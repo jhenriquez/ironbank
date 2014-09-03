@@ -19,8 +19,6 @@ namespace IronBank
                     LoginPath = new PathString("/auth/login"),
                     ExpireTimeSpan = new System.TimeSpan(0,10,0)
                 });
-
-            UserManagerFactory = () => { return new UserManager<User>(new UserStore<User>(new IronBankEntities())); }; 
         }
     }
 }

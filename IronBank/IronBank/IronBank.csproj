@@ -222,7 +222,10 @@
     <Compile Include="Models\ServicesModel.cs" />
     <Compile Include="Models\TransactionModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServicesModel\AuthenticationService.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\EditableUser.cs" />
+    <Compile Include="ViewModels\LoginInformation.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

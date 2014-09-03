@@ -1,4 +1,5 @@
 ﻿using IronBank.Models;
+using IronBank.Services;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
@@ -13,16 +14,30 @@ namespace IronBank.Controllers
         public IronController()
         {
             db = new IronBankEntities();
-            UserManager = Startup.UserManagerFactory.Invoke();
+            Authentication = new AuthenticationService();
         }
 
         public IronController(IronBankEntities context)
         {
             if (context == null) 
                 throw new ArgumentNullException("IronController: context can not be null.");
+            db = context;
+            Authentication = new AuthenticationService(db);
         }
 
         protected IronBankEntities db { get; set; }
-        protected UserManager<User> UserManager { get; set; }
+        protected AuthenticationService Authentication { get; set; }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
