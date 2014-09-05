@@ -11,11 +11,7 @@ namespace IronBank.Controllers
 {
     public abstract class IronController : Controller
     {
-        public IronController()
-        {
-            db = new IronBankEntities();
-            Authentication = new AuthenticationService();
-        }
+        public IronController() : this(new IronBankEntities()) { }
 
         public IronController(IronBankEntities context)
         {
