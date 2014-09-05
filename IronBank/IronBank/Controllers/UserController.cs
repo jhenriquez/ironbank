@@ -1,36 +1,40 @@
 ﻿using IronBank.Models;
 using IronBank.ViewModels;
 using Microsoft.AspNet.Identity;
+using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Web.Mvc;
 
 namespace IronBank.Controllers
 {
-    public class UserController : Controller
+    public class UserController : IronController
     {
-        private readonly UserManager<User> UserManager = Startup.UserManagerFactory.Invoke();
-        private IronBankEntities db = new IronBankEntities();
-
         [HttpGet]
         public new ActionResult Profile()
         {
-            return View(UserManager.FindByName(User.Identity.Name));
+            var user = Authentication.CurrentUser;
+            return View(Authentication.CurrentUser);
         }
 
         [HttpPost]
         public new ActionResult Profile(EditableUser editedUser)
         {
-            var user = UserManager.FindById(editedUser.Id);
-            
+            var user = Authentication.CurrentUser;
+
             UpdateModel<User>(user);
 
             try
             {
-                UserManager.Update(user);
+                db.Entry(user).State = EntityState.Modified;
+                db.SaveChanges();
                 return View(user);
             }
             catch (DbEntityValidationException validations)
-            {    
+            {
+                foreach (var errors in validations.EntityValidationErrors)
+                    foreach (var err in errors.ValidationErrors)
+                        ModelState.AddModelError(err.PropertyName, err.ErrorMessage);
+                
                 return View();
             }
         }
@@ -38,7 +42,7 @@ namespace IronBank.Controllers
         [HttpGet]
         public ActionResult Edit()
         {
-            return View(UserManager.FindByName(User.Identity.Name));
+            return View(Authentication.CurrentUser);
         }
     }
 }
