@@ -12,7 +12,6 @@ namespace IronBank.Controllers
         [HttpGet]
         public new ActionResult Profile()
         {
-            var user = Authentication.CurrentUser;
             return View(Authentication.CurrentUser);
         }
 

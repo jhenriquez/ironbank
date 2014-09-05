@@ -45,7 +45,7 @@ namespace IronBank.Services
             get
             {
                 if (_currentUser == null)
-                    _currentUser = UserManager.FindByName(HttpContext.Current.Request.LogonUserIdentity.Name);
+                    _currentUser = UserManager.FindByName(HttpContext.Current.Request.GetOwinContext().Authentication.User.Identity.Name);
                 return _currentUser;
             }
         }
