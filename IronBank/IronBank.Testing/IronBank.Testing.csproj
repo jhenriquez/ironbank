@@ -74,6 +74,7 @@
     <Compile Include="Units\Models\ProductModel.cs" />
     <Compile Include="Units\Models\ProductModel_AccountGenerator.cs" />
     <Compile Include="Units\Models\TransactionModel.cs" />
+    <Compile Include="Units\Models\TransferManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IronBank\IronBank.csproj">

@@ -94,5 +94,10 @@ namespace IronBank.Models
         {
             return context.Transactions.Where((t) => t.Product.AccountNumber == accountNumber).ToList();
         }
+
+        public Transaction Create(Product account, TransactionType type, Double amount)
+        {
+            return new Transaction() { Product = account, Type = type, Amount = amount };
+        }
     }
 }

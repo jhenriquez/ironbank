@@ -112,5 +112,11 @@ namespace IronBank.Models
         {
             return Create(customer.Id, type, currency, balance);
         }
+
+        public Product GetByNumber(String number)
+        {
+            if (string.IsNullOrEmpty(number)) throw new ArgumentNullException("GetByNumber: number can not be null or empty.");
+            return _context.Products.Where((p) => p.AccountNumber == number).FirstOrDefault();
+        }
     }
 }
