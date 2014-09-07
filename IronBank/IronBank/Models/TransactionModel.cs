@@ -43,9 +43,11 @@ namespace IronBank.Models
     public class TransactionService : IronBank.Models.ITransactionService
     {
         IronBankEntities context;
+        AccountNumberGenerator generator;
 
         public TransactionService(IronBankEntities providedContext)
         {
+            generator = new AccountNumberGenerator();
             this.context = providedContext;
         }
 
@@ -95,9 +97,9 @@ namespace IronBank.Models
             return context.Transactions.Where((t) => t.Product.AccountNumber == accountNumber).ToList();
         }
 
-        public Transaction Create(Product account, TransactionType type, Double amount)
+        public Transaction Create(Product account, TransactionType type, Double amount, String description)
         {
-            return new Transaction() { Product = account, Type = type, Amount = amount };
+            return new Transaction() { Product = account, Type = type, Amount = amount, Description = description, Number = generator.Generate(15), CreatedAt = DateTime.Now };
         }
     }
 }

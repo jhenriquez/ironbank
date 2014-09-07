@@ -225,14 +225,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServicesModel\AuthenticationService.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\AmountTransferViewModel.cs" />
     <Compile Include="ViewModels\EditableUser.cs" />
     <Compile Include="ViewModels\LoginInformation.cs" />
+    <Compile Include="ViewModels\ProductViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Auth\Login.cshtml" />
-    <Content Include="Views\Dashboard\Summary.cshtml" />
     <Content Include="Views\Shared\_layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Transfers\index.cshtml" />
@@ -242,6 +243,7 @@
     <Content Include="Views\Services\configure.cshtml" />
     <Content Include="Views\Dashboard\index.cshtml" />
     <Content Include="Views\Transactions\index.cshtml" />
+    <Content Include="Views\Shared\_error.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

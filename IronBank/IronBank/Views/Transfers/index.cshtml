@@ -1,13 +1,51 @@
 ﻿@{ Layout = "~/Views/Shared/_layout.cshtml"; }
 
+@model IronBank.ViewModels.AmountTransferViewModel
+
 <div class="row">
-    <div class="col-md-12">
-        <div class="jumbotron">
-            <h1>Transfers</h1>
-            <p>
-                This is the transfers area of the site. As you can see, it's not available yet but I promise it will be soon!
-                From here you'll be able to transfer money through your products and maybe... Maybe... Externally :)
-            </p>
-        </div>
+    <div class="col-md-4 col-md-offset-4">
+        @if (Html.ViewData.ModelState["Errors"] != null) {
+            foreach (var error in Html.ViewData.ModelState["Errors"].Errors) {
+            <div class="alert alert-danger text-center">@error.ErrorMessage</div>
+            }
+        }
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4 col-md-offset-4">
+        <form method="post" action="/transfers/execute">
+            <div class="form-group">
+                <label for="Source">Source Account</label>
+                <select name="Source" class="form-control">
+                @foreach (var account in Model.AvailableProducts) {
+                    if (Model.Source == account.Number) {
+                    <option value="@account.Number" selected>@account.Number (@account.Balance)</option>
+                    } else {
+                    <option value="@account.Number">@account.Number (@account.Balance)</option>
+                    }
+                }
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="Target">Target Account</label>
+                <select name="Target" class="form-control">
+                @foreach (var account in Model.AvailableProducts) {
+                    if (Model.Target == account.Number) {
+                    <option value="@account.Number" selected>@account.Number (@account.Balance)</option>
+                    } else {
+                    <option value="@account.Number">@account.Number (@account.Balance)</option>
+                    }
+                }
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="Amount">Amount</label>
+                <input type="text" class="form-control" name="Amount" />
+            </div>
+            <div class="pull-right">
+                <input type="submit" class="btn btn-primary" value="Transfer!" />
+            </div>
+        </form>
     </div>
 </div>
