@@ -25,15 +25,3 @@ namespace IronBank.Controllers
         protected AuthenticationService Authentication { get; set; }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
