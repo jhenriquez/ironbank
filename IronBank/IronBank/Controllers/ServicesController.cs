@@ -34,7 +34,8 @@ namespace IronBank.Controllers
         {
             try 
             {
-                return View("Index", payableServicesManager.GetConfiguredServices());
+                payableServicesManager.Configure(model.ServiceId, model.ContractReference);
+                return RedirectToAction("Index");
             } 
             catch (InvalidOperationException error) 
             {
