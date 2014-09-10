@@ -63,6 +63,9 @@ namespace IronBank.Migrations
 
         public void SeedConfiguredServices(IronBankEntities context)
         {
+            if (context.ConfiguredServices.Count() > 0)
+                return;
+
             var userManager = new UserManager<User>(new UserStore<User>(context));
             var user = userManager.FindByName("jhenriquez");
 
