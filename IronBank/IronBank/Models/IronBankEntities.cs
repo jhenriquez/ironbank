@@ -16,5 +16,6 @@ namespace IronBank.Models
         public DbSet<AvailableService> AvailableServices { get; set; }
         public DbSet<ConfiguredService> ConfiguredServices { get; set; }
         public DbSet<ConfiguredServiceInstance> ServiceInstances { get; set; }
+        public DbSet<ServiceInstancePayment> ServicePayments { get; set; }
     }
 }

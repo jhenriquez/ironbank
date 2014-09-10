@@ -214,6 +214,10 @@
     <Compile Include="Migrations\201408311430250_AddTransactionDescription.Designer.cs">
       <DependentUpon>201408311430250_AddTransactionDescription.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201409100041200_AddedServicePaymentModel.cs" />
+    <Compile Include="Migrations\201409100041200_AddedServicePaymentModel.Designer.cs">
+      <DependentUpon>201409100041200_AddedServicePaymentModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountNumberGenerator.cs" />
     <Compile Include="Models\AuthenticationModel.cs" />
@@ -224,11 +228,13 @@
     <Compile Include="Models\TransferManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServicesModel\AuthenticationService.cs" />
+    <Compile Include="ServicesModel\ServiceManager.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\AmountTransferViewModel.cs" />
     <Compile Include="ViewModels\EditableUser.cs" />
     <Compile Include="ViewModels\LoginInformation.cs" />
     <Compile Include="ViewModels\ProductViewModel.cs" />
+    <Compile Include="ViewModels\ServiceConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -270,6 +276,9 @@
     <EmbeddedResource Include="Migrations\201408311430250_AddTransactionDescription.resx">
       <DependentUpon>201408311430250_AddTransactionDescription.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201409100041200_AddedServicePaymentModel.resx">
+      <DependentUpon>201409100041200_AddedServicePaymentModel.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -284,7 +293,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>61000</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:54001/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

@@ -1,51 +1,47 @@
-﻿using IronBank.Models;
-using System.Web.Mvc;
+﻿using IronBank.ServicesModel;
+using IronBank.ViewModels;
+using System;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace IronBank.Controllers
 {
     [Authorize]
     public class ServicesController : IronController
     {
+        private readonly ServiceManager payableServicesManager;
+
+        public ServicesController() 
+        {
+            payableServicesManager =
+                new ServiceManager(db)
+                    .SetContextUser(Authentication.CurrentUser);
+        }
+
         public ActionResult Index()
         {
-            return View(
-                db.ConfiguredServices.Where((s) => s.User.UserName ==  User.Identity.Name).ToList() // I know... needs refactoring...
-                );
+            return View(payableServicesManager.GetConfiguredServices());
         }
 
         [HttpGet]
         public ActionResult Configure()
         {
-            return View(new ServiceConfiguration() { AvailableServices = db.AvailableServices.ToList() });
+            return View(new ServiceConfiguration() { AvailableServices = payableServicesManager.GetAvailableServices() });
         }
 
         [HttpPost]
-        public async Task<ActionResult> Configure(ServiceConfiguration model)
+        public ActionResult Configure(ServiceConfiguration model)
         {
-            var newService = new ConfiguredService();
-
-            UpdateModel<ConfiguredService>(newService);
-
-            newService.User = db.Users.Where((u) => u.UserName == User.Identity.Name).FirstOrDefault();
-
-            var isExistentConfiguration = db
-                .ConfiguredServices.Where((s) =>
-                    (s.ContractReference == newService.ContractReference && s.UserId == newService.User.Id) ||
-                    (s.Service.Id == newService.ServiceId && s.ContractReference == newService.ContractReference && s.UserId == newService.User.Id)).Count() > 0;
-
-            if (isExistentConfiguration)
+            try 
             {
-                ModelState.AddModelError("Configuration", "Service Contract Already In Place.");
+                return View("Index", payableServicesManager.GetConfiguredServices());
+            } 
+            catch (InvalidOperationException error) 
+            {
+                ModelState.AddModelError("Configuration", error.Message);
                 model.AvailableServices = db.AvailableServices.ToList();
                 return View(model);
             }
-
-            db.ConfiguredServices.Add(newService);
-            db.SaveChanges();
-
-            return View("Index");
         }
     }
 }

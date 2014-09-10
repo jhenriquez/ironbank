@@ -48,13 +48,18 @@ namespace IronBank.Models
 
     public class ConfiguredServiceInstance
     {
+        public ConfiguredServiceInstance()
+        {
+            IsPending = true;
+        }
+
         public Int32 Id { get; set; }
         public Int32 ConfiguredServiceId { get; set; }
         public virtual ConfiguredService Configuration { get; set; }
+        public virtual IList<ServiceInstancePayment> Payments { get; set; } 
         public Double Amount { get; set; }
         public DateTime GeneratedAt { get; set; }
         public DateTime? PayBefore { get; set; }
-        [DefaultValue(true)]
         public Boolean IsPending { get; set; }
 
         [NotMapped]
@@ -67,16 +72,24 @@ namespace IronBank.Models
                 return false;
             }
         }
+
+        [NotMapped]
+        public Double TotalPayments
+        {
+            get
+            {
+                if (Payments == null)
+                    return 0.00;
+                return Payments.Sum((p) => p.Amount);
+            }
+        }
     }
 
-    #region View Models
-
-    public class ServiceConfiguration
+    public class ServiceInstancePayment
     {
-        public Int32 ServiceId { get; set; }
-        public String ContractReference { get; set; }
-        public IList<AvailableService> AvailableServices { get; set; }
+        public Int32 Id { get; set; }
+        public Int32 ConfiguredServiceInstanceId { get; set; }
+        public virtual ConfiguredServiceInstance ConfiguredServiceInstace { get; set; }
+        public Double Amount { get; set; }
     }
-
-    #endregion
 }
