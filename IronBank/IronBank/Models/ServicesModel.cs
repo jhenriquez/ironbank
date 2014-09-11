@@ -20,47 +20,35 @@ namespace IronBank.Models
         public virtual User User { get; set; }
         public Int32 ServiceId { get; set; }
         public virtual AvailableService Service { get; set; }
-        public virtual IList<ConfiguredServiceInstance> Instances { get; set; }
+        public virtual ServiceBill Billing { get; set; }
         public String ContractReference { get; set; }
-
-        [NotMapped]
-        public Boolean HasPendingInstances
-        {
-            get
-            {
-                if (Instances == null)
-                    return false;
-                return Instances.Where((i) => i.IsPending).Count() > 0;
-            }
-        }
 
         [NotMapped]
         public Double PendingBalance
         {
             get
             {
-                if (!HasPendingInstances)
+                if (Billing == null)
                     return 0.00;
-                return Instances.Where((i) => i.IsPending).Sum((i) => i.Amount);
+                return Billing.Balance;
             }
         }
     }
 
-    public class ConfiguredServiceInstance
+    public class ServiceBill
     {
-        public ConfiguredServiceInstance()
-        {
-            IsPending = true;
-        }
-
         public Int32 Id { get; set; }
         public Int32 ConfiguredServiceId { get; set; }
-        public virtual ConfiguredService Configuration { get; set; }
-        public virtual IList<ServiceInstancePayment> Payments { get; set; } 
+        public virtual IList<ServicePayment> Payments { get; set; } 
         public Double Amount { get; set; }
         public DateTime GeneratedAt { get; set; }
         public DateTime? PayBefore { get; set; }
-        public Boolean IsPending { get; set; }
+
+        [NotMapped]
+        public Double Balance
+        {
+            get { return Amount - TotalPayments; }
+        }
 
         [NotMapped]
         public Boolean HasExpired
@@ -85,11 +73,11 @@ namespace IronBank.Models
         }
     }
 
-    public class ServiceInstancePayment
+    public class ServicePayment
     {
         public Int32 Id { get; set; }
-        public Int32 ConfiguredServiceInstanceId { get; set; }
-        public virtual ConfiguredServiceInstance ConfiguredServiceInstace { get; set; }
+        public Int32 ServiceBillId { get; set; }
+        public virtual ServiceBill Bill { get; set; }
         public Double Amount { get; set; }
     }
 }

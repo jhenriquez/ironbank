@@ -223,6 +223,18 @@
     <Compile Include="Migrations\201409100041200_AddedServicePaymentModel.Designer.cs">
       <DependentUpon>201409100041200_AddedServicePaymentModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201409110455481_RenamedServiceInstance.cs" />
+    <Compile Include="Migrations\201409110455481_RenamedServiceInstance.Designer.cs">
+      <DependentUpon>201409110455481_RenamedServiceInstance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201409110458508_RenamedServicePayment.cs" />
+    <Compile Include="Migrations\201409110458508_RenamedServicePayment.Designer.cs">
+      <DependentUpon>201409110458508_RenamedServicePayment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201409110507129_ChangedServicesModelToSingleBill.cs" />
+    <Compile Include="Migrations\201409110507129_ChangedServicesModelToSingleBill.Designer.cs">
+      <DependentUpon>201409110507129_ChangedServicesModelToSingleBill.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountNumberGenerator.cs" />
     <Compile Include="Models\AuthenticationModel.cs" />
@@ -283,6 +295,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201409100041200_AddedServicePaymentModel.resx">
       <DependentUpon>201409100041200_AddedServicePaymentModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201409110455481_RenamedServiceInstance.resx">
+      <DependentUpon>201409110455481_RenamedServiceInstance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201409110458508_RenamedServicePayment.resx">
+      <DependentUpon>201409110458508_RenamedServicePayment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201409110507129_ChangedServicesModelToSingleBill.resx">
+      <DependentUpon>201409110507129_ChangedServicesModelToSingleBill.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

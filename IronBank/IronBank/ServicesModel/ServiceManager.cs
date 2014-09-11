@@ -76,6 +76,25 @@ namespace IronBank.ServicesModel
             return ValidateAndSave(newConfiguration);
         }
 
+        public ServiceBill CreateServiceBill(ConfiguredService service, Double amount, DateTime? payBefore, Boolean consolidate)
+        {
+            var billing = new ServiceBill() { Amount = amount, ConfiguredServiceId = service.Id, GeneratedAt = DateTime.Now };
+
+            if (payBefore.HasValue)
+                billing.PayBefore = DateTime.Today.AddDays(15);
+
+            if (consolidate)
+                billing.Amount += service.PendingBalance;
+
+            service.Billing = billing;
+
+            db.Entry(service).State = System.Data.Entity.EntityState.Modified;
+            db.ServiceBilling.Add(billing);
+            db.SaveChanges();
+
+            return billing;
+        }
+
         private ConfiguredService ValidateAndSave(ConfiguredService newConfiguration)
         {
             ValidateIsNonExistent(newConfiguration);
