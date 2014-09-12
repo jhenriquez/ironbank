@@ -10,6 +10,7 @@ namespace IronBank.ServicesModel
     {
         private readonly IronBankEntities db;
         private User contextUser;
+        private ProductService productManager;
 
         public ServiceManager() : this(new IronBankEntities()) { }
 
@@ -18,6 +19,7 @@ namespace IronBank.ServicesModel
             if (context == null)
                 throw new ArgumentNullException("ServiceManager: context can not be null.");
             db = context;
+            productManager = new ProductService(db);
         }
 
         public IList<AvailableService> GetAvailableServices()
@@ -93,6 +95,15 @@ namespace IronBank.ServicesModel
             db.SaveChanges();
 
             return billing;
+        }
+
+        public ServicePayment CreateServicePayment(ConfiguredService service, String accNumber, Double amount, Boolean persist)
+        {
+            productManager.DebitAccount(accNumber, amount, "Service Payment: " + service.ContractReference);
+            var payment = new ServicePayment() { ServiceBillId = service.Id, Amount = amount, PaymentDate = DateTime.Now };
+            db.ServicePayments.Add(payment);
+            db.SaveChanges();
+            return payment;
         }
 
         private ConfiguredService ValidateAndSave(ConfiguredService newConfiguration)

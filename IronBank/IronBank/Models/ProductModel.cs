@@ -59,7 +59,7 @@ namespace IronBank.Models
             if (context == null)
                 throw new ArgumentNullException("ProductService Constructor: context can not be null.");
             _context = context;
-            _transactionService = new TransactionService();
+            _transactionService = new TransactionService(_context);
         }
 
         public ProductService()
@@ -111,6 +111,54 @@ namespace IronBank.Models
         public Product Create(User customer, ProductType type, ProductCurrency currency, Double balance)
         {
             return Create(customer.Id, type, currency, balance);
+        }
+
+        public void CreditAccount(String accNumber, Double amount, string concept)
+        {
+            CreditAccount(GetByNumber(accNumber), amount, concept);
+        }
+
+        public void CreditAccount(Int32 Id, Double amount, string concept)
+        {
+            CreditAccount(GetById(Id), amount, concept);
+        }
+
+        public void CreditAccount(Product product, Double amount, string concept)
+        {
+            product.Balance += amount;
+
+            _context.Transactions.Add(
+                _transactionService.Create(product, TransactionType.Credit, amount, concept)
+                );
+
+            _context.Entry(product).State = System.Data.Entity.EntityState.Modified;
+            _context.SaveChanges();
+        }
+        
+        public void DebitAccount(String accNumber, Double amount, string concept)
+        {
+            DebitAccount(GetByNumber(accNumber), amount, concept);
+        }
+
+        public void DebitAccount(Int32 Id, Double amount, string concept)
+        {
+            DebitAccount(GetById(Id), amount, concept);
+        }
+
+        public void DebitAccount(Product product, Double amount, string concept)
+        {
+
+            if (product.Balance < amount)
+                throw new InvalidOperationException("The amount exceeds the balance held on the account.");
+
+            product.Balance -= amount;
+
+            _context.Transactions.Add(
+                _transactionService.Create(product, TransactionType.Debit, amount, concept)
+                );
+
+            _context.Entry(product).State = System.Data.Entity.EntityState.Modified;
+            _context.SaveChanges();
         }
 
         public Product GetByNumber(String number)

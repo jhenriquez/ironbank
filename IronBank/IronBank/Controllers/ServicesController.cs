@@ -20,7 +20,16 @@ namespace IronBank.Controllers
 
         public ActionResult Index()
         {
-            return View(payableServicesManager.GetConfiguredServices());
+            return View(payableServicesManager
+                            .GetConfiguredServices()
+                            .Select((cfg) => new ServiceDetailsViewModel()
+                            {
+                                Contract = cfg.ContractReference,
+                                ServiceId = cfg.Id,
+                                Provider = cfg.Service.Name,
+                                PaymentAmount = cfg.Billing.Balance
+                            }).ToList()
+                            );
         }
 
         [HttpGet]
@@ -43,6 +52,45 @@ namespace IronBank.Controllers
                 model.AvailableServices = db.AvailableServices.ToList();
                 return View(model);
             }
+        }
+
+        [HttpGet]
+        public ActionResult Pay(Int32 Id)
+        {
+            var service = payableServicesManager.GetConfiguredServices().Where(s => s.Id == Id).FirstOrDefault();
+
+            if (service == null)
+                return View("error");
+
+            return View(new ServiceDetailsViewModel() {
+                ServiceId = service.Id,
+                Contract = service.ContractReference,
+                PaymentAmount = service.Billing.Amount,
+                Provider = service.Service.Name
+            });
+        }
+
+        [HttpPost]
+        public ActionResult Pay(ServiceDetailsViewModel model)
+        {
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public ActionResult Details(Int32 Id)
+        {
+            var service = payableServicesManager.GetConfiguredServices().Where(s => s.Id == Id).FirstOrDefault();
+
+            if (service == null)
+                return View("error");
+
+            return View(new ServiceDetailsViewModel()
+            {
+                ServiceId = service.Id,
+                Contract = service.ContractReference,
+                PaymentAmount = service.Billing.Amount,
+                Provider = service.Service.Name
+            });
         }
     }
 }

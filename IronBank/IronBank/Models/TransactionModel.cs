@@ -37,6 +37,7 @@ namespace IronBank.Models
         IList<Transaction> GetByProductIdAndDate(int id, DateTime? start, DateTime? end);
         IList<Transaction> GetByType(TransactionType type);
         IList<Transaction> GetByProductAccount(String accountNumber);
+        Transaction Create(Product account, TransactionType type, Double amount, String description);
     }
 
 

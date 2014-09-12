@@ -1,9 +1,21 @@
 ﻿@{ Layout = "~/Views/Shared/_layout.cshtml"; }
 
-@model System.Collections.Generic.IList<IronBank.Models.ConfiguredService>
+@model System.Collections.Generic.IList<IronBank.ViewModels.ServiceDetailsViewModel>
 
 <div class="row">
-    <div class="col-md-8 col-md-offset-2">
+    <span class="pull-left">
+        <a href="/services/configure" class="btn btn-primary">Configure New Service</a>
+    </span>
+    @foreach (var cfgService in Model) {
+    <div class="col-md-4">
+        <div class="service-container">
+            <span class="service-name">@cfgService.Provider</span>
+            <span class="service-description">@cfgService.Contract</span>
+            <span class="service-description text-center">@cfgService.PaymentAmount</span>
+        </div>
+    </div>
+    }
+    @*<div class="col-md-8 col-md-offset-2">
         <table class="table table-hover">
             <tr>
                 <th>Service Name</th>
@@ -23,8 +35,6 @@
             </tr>
             }
         </table>
-        <span class="pull-right">
-            <a href="/services/configure" class="btn btn-primary">Configure New Service</a>
-        </span>
-    </div>
+        
+    </div>*@
 </div>

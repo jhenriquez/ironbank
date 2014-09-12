@@ -1,0 +1,12 @@
+﻿@{ Layout = "~/Views/Shared/_layout.cshtml"; }
+
+@model IronBank.ViewModels.PaymentDetailsViewModel
+
+<dl class="dl-horizonal">
+    <dt>Provider:</dt>
+    <dd>@Model.Provider</dd>
+    <dt>Contract:</dt>
+    <dd>@Model.Contract</dd>
+    <dt>Balance:</dt>
+    <dd>@Model.PaymentAmount</dd>
+</dl>

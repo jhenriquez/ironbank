@@ -235,6 +235,18 @@
     <Compile Include="Migrations\201409110507129_ChangedServicesModelToSingleBill.Designer.cs">
       <DependentUpon>201409110507129_ChangedServicesModelToSingleBill.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201409120000520_AddServicePaymentDate.cs" />
+    <Compile Include="Migrations\201409120000520_AddServicePaymentDate.Designer.cs">
+      <DependentUpon>201409120000520_AddServicePaymentDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201409120426583_AddServiceBillIdToService.cs" />
+    <Compile Include="Migrations\201409120426583_AddServiceBillIdToService.Designer.cs">
+      <DependentUpon>201409120426583_AddServiceBillIdToService.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201409120431268_AddServiceAndBillAssociation.cs" />
+    <Compile Include="Migrations\201409120431268_AddServiceAndBillAssociation.Designer.cs">
+      <DependentUpon>201409120431268_AddServiceAndBillAssociation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountNumberGenerator.cs" />
     <Compile Include="Models\AuthenticationModel.cs" />
@@ -250,6 +262,7 @@
     <Compile Include="ViewModels\AmountTransferViewModel.cs" />
     <Compile Include="ViewModels\EditableUser.cs" />
     <Compile Include="ViewModels\LoginInformation.cs" />
+    <Compile Include="ViewModels\PaymentDetailsViewModel.cs" />
     <Compile Include="ViewModels\ProductViewModel.cs" />
     <Compile Include="ViewModels\ServiceConfiguration.cs" />
   </ItemGroup>
@@ -267,6 +280,8 @@
     <Content Include="Views\Dashboard\index.cshtml" />
     <Content Include="Views\Transactions\index.cshtml" />
     <Content Include="Views\Shared\_error.cshtml" />
+    <Content Include="Views\Services\pay.cshtml" />
+    <Content Include="Views\Services\details.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -304,6 +319,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201409110507129_ChangedServicesModelToSingleBill.resx">
       <DependentUpon>201409110507129_ChangedServicesModelToSingleBill.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201409120000520_AddServicePaymentDate.resx">
+      <DependentUpon>201409120000520_AddServicePaymentDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201409120426583_AddServiceBillIdToService.resx">
+      <DependentUpon>201409120426583_AddServiceBillIdToService.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201409120431268_AddServiceAndBillAssociation.resx">
+      <DependentUpon>201409120431268_AddServiceAndBillAssociation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

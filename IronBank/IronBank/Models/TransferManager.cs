@@ -35,28 +35,12 @@ namespace IronBank.Models
             if (Source.AccountNumber == Target.AccountNumber)
                 throw new InvalidOperationException("ExecuteTransference: You need to specify different accounts.");
 
-            if (Source.Balance < Amount)
-                throw new InvalidOperationException("ExecuteTransference: The provided amount exceeds the source account.");
-
             if (Amount <= 0)
                 throw new InvalidOperationException("ExecuteTransference: You need to provide a balance that is greater than zero.");
 
-            Source.Balance -= Amount;
-            Target.Balance += Amount;
-
-
-            db.Transactions.Add(
-                transactionManager.Create(Source, TransactionType.Debit, Amount, "Transference to Account: " + Target.AccountNumber)
-                );
-
-            db.Transactions.Add(
-                transactionManager.Create(Target, TransactionType.Credit, Amount, "Transference From: " + Source.AccountNumber)
-                );
-
-            db.Entry(Source).State = System.Data.Entity.EntityState.Modified;
-            db.Entry(Target).State = System.Data.Entity.EntityState.Modified;
-
-            db.SaveChanges();
+            productsManager.DebitAccount(Source, Amount, "Transfer To: " + Target.AccountNumber);
+            productsManager.CreditAccount(Target, Amount, "Transfer From: " + Source.AccountNumber);
+            
         }
 
         public void SetSource(String accountNumber)

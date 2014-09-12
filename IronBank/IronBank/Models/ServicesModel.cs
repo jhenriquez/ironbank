@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace IronBank.Models
 {
@@ -19,6 +20,7 @@ namespace IronBank.Models
         public String UserId { get; set; }
         public virtual User User { get; set; }
         public Int32 ServiceId { get; set; }
+        public Int32 ServiceBillId { get; set; }
         public virtual AvailableService Service { get; set; }
         public virtual ServiceBill Billing { get; set; }
         public String ContractReference { get; set; }
@@ -38,6 +40,7 @@ namespace IronBank.Models
     public class ServiceBill
     {
         public Int32 Id { get; set; }
+        [Required]
         public Int32 ConfiguredServiceId { get; set; }
         public virtual IList<ServicePayment> Payments { get; set; } 
         public Double Amount { get; set; }
@@ -79,5 +82,6 @@ namespace IronBank.Models
         public Int32 ServiceBillId { get; set; }
         public virtual ServiceBill Bill { get; set; }
         public Double Amount { get; set; }
+        public DateTime PaymentDate { get; set; }
     }
 }
