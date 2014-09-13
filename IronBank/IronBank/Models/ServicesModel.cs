@@ -20,7 +20,7 @@ namespace IronBank.Models
         public String UserId { get; set; }
         public virtual User User { get; set; }
         public Int32 ServiceId { get; set; }
-        public Int32 ServiceBillId { get; set; }
+        public Int32? ServiceBillId { get; set; }
         public virtual AvailableService Service { get; set; }
         public virtual ServiceBill Billing { get; set; }
         public String ContractReference { get; set; }
