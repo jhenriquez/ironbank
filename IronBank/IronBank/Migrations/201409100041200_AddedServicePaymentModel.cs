@@ -18,7 +18,6 @@ namespace IronBank.Migrations
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.ConfiguredServiceInstances", t => t.ConfiguredServiceInstanceId, cascadeDelete: true)
                 .Index(t => t.ConfiguredServiceInstanceId);
-            
         }
         
         public override void Down()

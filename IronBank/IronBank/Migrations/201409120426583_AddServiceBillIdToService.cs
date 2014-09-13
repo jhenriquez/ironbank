@@ -7,6 +7,7 @@ namespace IronBank.Migrations
     {
         public override void Up()
         {
+            DropForeignKey("dbo.ServiceBills", "FK_dbo.ConfiguredServiceInstances_dbo.ConfiguredServices_ConfiguredServiceId");
             DropColumn("dbo.ServiceBills", "ConfiguredServiceId");
         }
         

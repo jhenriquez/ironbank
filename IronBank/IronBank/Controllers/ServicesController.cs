@@ -27,7 +27,7 @@ namespace IronBank.Controllers
                                 Contract = cfg.ContractReference,
                                 ServiceId = cfg.Id,
                                 Provider = cfg.Service.Name,
-                                PaymentAmount = cfg.Billing.Balance
+                                PaymentAmount = cfg.Billing == null ? 0.00 : cfg.Billing.Balance
                             }).ToList()
                             );
         }
